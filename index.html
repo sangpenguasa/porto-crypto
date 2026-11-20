@@ -1,0 +1,1133 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PORTO REALTIME</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Poppins','Segoe UI',Tahoma,sans-serif;background:#000;min-height:100vh;overflow-x:hidden}
+.hidden{display:none!important}
+
+/* ---------- Animations ---------- */
+@keyframes aurora{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
+@keyframes aurora-move{0%{transform:translate(0,0) rotate(0);opacity:.7}25%{transform:translate(5%,5%) rotate(90deg);opacity:.8}50%{transform:translate(10%,0) rotate(180deg);opacity:.9}75%{transform:translate(5%,-5%) rotate(270deg);opacity:.8}100%{transform:translate(0,0) rotate(360deg);opacity:.7}}
+@keyframes float{0%,100%{transform:translateY(0) rotate(0)}33%{transform:translateY(-10px) rotate(120deg)}66%{transform:translateY(10px) rotate(240deg)}}
+@keyframes pulse-glow{0%,100%{box-shadow:0 0 20px rgba(82,39,255,.3),0 0 40px rgba(82,39,255,.2)}50%{box-shadow:0 0 30px rgba(82,39,255,.5),0 0 60px rgba(82,39,255,.3)}}
+@keyframes slideUp{from{opacity:0;transform:translateY(80px)}to{opacity:1;transform:translateY(0)}}
+@keyframes slideDown{from{opacity:0;transform:translateY(-20px)}to{opacity:1;transform:translateY(0)}}
+@keyframes shine{0%{transform:translateX(-100%)}100%{transform:translateX(100%)}}
+@keyframes gradientShift{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
+@keyframes fadeInOut{0%,100%{opacity:.3}50%{opacity:1}}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* ---------- Login ---------- */
+#loginPage{min-height:100vh;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;
+background:linear-gradient(-45deg,#0a0a14,#0f0f1f,#1a1a2e,#16213e,#0f3460);background-size:400% 400%;animation:aurora 15s ease infinite}
+#loginPage::before,#loginPage::after{content:'';position:absolute;width:150%;height:150%;top:-25%;left:-25%;opacity:.3;pointer-events:none;z-index:0}
+#loginPage::before{background:radial-gradient(circle at 30% 30%,rgba(82,39,255,.4) 0%,transparent 50%);animation:aurora-move 20s linear infinite}
+#loginPage::after{background:radial-gradient(circle at 70% 70%,rgba(255,159,252,.3) 0%,transparent 50%);animation:aurora-move 25s linear infinite reverse}
+.aurora-particle{position:absolute;border-radius:50%;pointer-events:none;z-index:0}
+.floating-shape{position:absolute;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.1) 0%,transparent 70%);filter:blur(20px);opacity:.4;z-index:0}
+.shape1{width:300px;height:300px;top:10%;left:10%;animation:float 25s ease-in-out infinite}
+.shape2{width:200px;height:200px;bottom:20%;right:15%;animation:float 30s ease-in-out infinite reverse}
+.shape3{width:150px;height:150px;top:50%;left:80%;animation:float 20s ease-in-out infinite}
+.login-box{position:relative;z-index:2;background:rgba(10,10,20,.85);backdrop-filter:blur(15px);padding:60px 50px;border-radius:25px;border:1px solid rgba(255,255,255,.1);box-shadow:0 25px 75px rgba(0,0,0,.7);width:480px;max-width:90%;animation:slideUp .8s ease-out;color:#fff;overflow:hidden}
+.login-box::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(82,39,255,.5),rgba(255,159,252,.5),transparent)}
+.logo{text-align:center;margin-bottom:40px}
+.logo-icon{width:90px;height:90px;background:linear-gradient(135deg,#5227FF,#FF9FFC);border-radius:50%;margin:0 auto 25px;display:flex;align-items:center;justify-content:center;font-size:42px;animation:pulse-glow 4s infinite;position:relative;overflow:hidden}
+.logo-icon::after{content:'';position:absolute;inset:0;background:linear-gradient(45deg,transparent 30%,rgba(255,255,255,.2) 50%,transparent 70%);animation:shine 3s infinite linear}
+.login-box h1{text-align:center;margin-bottom:15px;font-size:36px;background:linear-gradient(90deg,#FF9FFC,#5227FF);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;font-weight:800;letter-spacing:1px}
+.subtitle{text-align:center;color:rgba(255,255,255,.7);font-size:16px;margin-bottom:40px;letter-spacing:1px}
+.input-group{margin-bottom:35px;position:relative}
+.input-group label{display:block;margin-bottom:12px;color:rgba(255,255,255,.9);font-weight:600;font-size:16px;letter-spacing:1px}
+.input-group input{width:100%;padding:18px 55px 18px 20px;border:2px solid rgba(255,255,255,.15);border-radius:15px;font-size:16px;transition:all .4s;background:rgba(255,255,255,.05);color:#fff;font-weight:500;font-family:inherit}
+.input-group input:focus{outline:none;border-color:#5227FF;box-shadow:0 0 0 4px rgba(82,39,255,.3);background:rgba(255,255,255,.08)}
+.input-group input::placeholder{color:rgba(255,255,255,.4)}
+.input-icon{position:absolute;right:20px;top:52px;color:#FF9FFC;font-size:22px;transition:all .3s;pointer-events:none}
+.btn-login{width:100%;padding:20px;background:linear-gradient(135deg,#5227FF,#B19EEF,#FF9FFC);background-size:200% 200%;color:#fff;border:none;border-radius:15px;font-size:18px;font-weight:700;cursor:pointer;transition:all .4s;letter-spacing:2px;animation:gradientShift 4s ease infinite;font-family:inherit}
+.btn-login:hover:not(:disabled){transform:translateY(-5px);box-shadow:0 15px 40px rgba(82,39,255,.6)}
+.btn-login:disabled{opacity:.7;cursor:wait}
+.alert{padding:16px 20px;margin-bottom:30px;border-radius:12px;font-size:15px;animation:slideDown .4s ease-out}
+.alert-error{background:rgba(255,87,87,.2);color:#ff5757;border-left:5px solid #ff5757}
+.alert-success{background:rgba(0,255,136,.2);color:#00ff88;border-left:5px solid #00ff88}
+.floating-text{position:absolute;bottom:30px;left:0;width:100%;text-align:center;color:rgba(255,255,255,.5);font-size:14px;letter-spacing:2px;z-index:2;animation:fadeInOut 8s ease-in-out infinite}
+@media(max-width:768px){.login-box{padding:40px 30px}.logo-icon{width:70px;height:70px;font-size:32px}.login-box h1{font-size:28px}.floating-shape{display:none}}
+
+/* ---------- Portfolio ---------- */
+:root{--primary:#4361ee;--primary-dark:#3a56d4;--secondary:#2a2b36;--success:#4ecdc4;--danger:#ff6b6b;--warning:#ffa94d;--dark:#1e1f29;--card-bg:#2a2b36;--card-border:#3a3b46;--text-primary:#e0e0e0;--text-secondary:#a0a0b0;--shadow:0 10px 30px rgba(0,0,0,.3);--radius:16px;--transition:all .3s ease;--soft:rgba(58,59,70,.3)}
+body.light-theme{--secondary:#f5f7fa;--success:#2a9d8f;--danger:#e53935;--warning:#ff9800;--dark:#f5f7fa;--card-bg:#fff;--card-border:#e0e0e0;--text-primary:#2a2b36;--text-secondary:#666;--shadow:0 10px 30px rgba(0,0,0,.1);--soft:rgba(224,224,224,.3)}
+#portfolioPage{background:linear-gradient(135deg,#1a1c28,#2a2b36);color:var(--text-primary);min-height:100vh;padding:20px;transition:var(--transition)}
+body.light-theme #portfolioPage{background:linear-gradient(135deg,#e4edf5,#f5f7fa)}
+.container{max-width:1400px;margin:0 auto;background:rgba(30,31,41,.7);backdrop-filter:blur(10px);border-radius:var(--radius);box-shadow:var(--shadow);padding:25px;border:1px solid rgba(58,59,70,.5)}
+body.light-theme .container{background:rgba(245,247,250,.9);border-color:rgba(224,224,224,.5)}
+.app-header{display:flex;justify-content:space-between;align-items:center;padding-bottom:20px;border-bottom:1px solid var(--card-border);margin-bottom:30px;gap:15px;flex-wrap:wrap}
+.app-title{display:flex;align-items:center;gap:15px}
+.app-title h1{font-size:28px;font-weight:700;background:linear-gradient(90deg,var(--primary),var(--success));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.app-logo{width:50px;height:50px;background:linear-gradient(135deg,var(--primary),var(--success));border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-size:24px}
+.header-actions{display:flex;align-items:center;gap:15px;flex-wrap:wrap}
+.username-container{display:flex;align-items:center;color:var(--text-secondary);font-weight:500;background:var(--soft);padding:8px 15px;border-radius:10px}
+.username-with-badge{display:flex;align-items:center;gap:5px}
+.verified-badge img,.footer-username img{width:16px;height:16px;object-fit:contain;vertical-align:middle}
+.tabs{display:flex;margin-bottom:25px;background:var(--card-bg);border-radius:50px;padding:5px}
+.tab{flex:1;padding:15px 25px;text-align:center;cursor:pointer;border-radius:50px;font-weight:600;transition:var(--transition);display:flex;align-items:center;justify-content:center;gap:10px}
+.tab.active{background:linear-gradient(135deg,var(--primary),var(--primary-dark));color:#fff;box-shadow:0 5px 15px rgba(67,97,238,.3)}
+.tab-content{display:none}
+.tab-content.active{display:block}
+.theme-toggle{background:linear-gradient(135deg,var(--card-bg),var(--dark));border:1px solid var(--card-border);border-radius:50px;width:50px;height:50px;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:var(--transition);color:var(--text-primary);font-size:16px}
+.theme-toggle:hover{transform:translateY(-3px);box-shadow:0 5px 15px rgba(0,0,0,.2)}
+.price-card,.form-section,.table-container,.chart-container,.card{background:var(--card-bg);border-radius:var(--radius);padding:25px;border:1px solid var(--card-border);box-shadow:0 5px 15px rgba(0,0,0,.1);margin-bottom:30px}
+.price-header h3,.form-section h3{font-size:18px;margin-bottom:15px;display:flex;align-items:center;gap:10px}
+.price-content{display:flex;align-items:center;gap:15px;flex-wrap:wrap}
+.currency-selector,.coin-selector{flex:1;min-width:160px}
+select,.form-control{width:100%;padding:12px 15px;border-radius:10px;border:1px solid var(--card-border);background:var(--card-bg);color:var(--text-primary);font-family:inherit;font-size:16px;transition:var(--transition)}
+.form-control:focus,select:focus{outline:none;border-color:var(--primary);box-shadow:0 0 0 3px rgba(67,97,238,.2)}
+.coin-price-display{flex:2;min-width:260px;display:flex;align-items:center;background:var(--soft);padding:15px;border-radius:10px;flex-wrap:wrap;gap:10px}
+.price-label{font-weight:600;color:var(--text-secondary)}
+.price-value{font-weight:700;font-size:22px;font-family:'Roboto',sans-serif;flex:1}
+.price-indicator{font-size:24px;font-weight:700;min-width:30px;text-align:center}
+.api-status{padding:5px 10px;border-radius:20px;font-size:14px}
+.api-status.live{background:rgba(78,205,196,.2);color:var(--success)}
+.api-status.fallback{background:rgba(255,169,77,.2);color:var(--warning)}
+.api-status.error{background:rgba(255,107,107,.2);color:var(--danger)}
+.hour-change{font-size:16px;font-weight:600;padding:4px 8px;border-radius:5px}
+.positive{color:var(--success)}
+.negative{color:var(--danger)}
+.hour-change.positive,.price-indicator.positive{background:rgba(78,205,196,.15)}
+.hour-change.negative,.price-indicator.negative{background:rgba(255,107,107,.15)}
+.form-row{display:flex;flex-wrap:wrap;gap:15px;margin-bottom:20px}
+.form-group{flex:1;min-width:200px}
+.form-group label{display:block;margin-bottom:8px;font-weight:500;color:var(--text-secondary)}
+textarea.form-control{resize:vertical}
+.btn{padding:12px 25px;background:linear-gradient(135deg,var(--primary),var(--primary-dark));color:#fff;border:none;border-radius:10px;font-family:inherit;font-size:16px;font-weight:600;cursor:pointer;transition:var(--transition);display:inline-flex;align-items:center;justify-content:center;gap:10px}
+.btn:hover:not(:disabled){transform:translateY(-3px);box-shadow:0 5px 15px rgba(67,97,238,.3)}
+.btn:disabled{opacity:.6;cursor:wait}
+.btn-danger{background:linear-gradient(135deg,var(--danger),#e53935)}
+.btn-sm{padding:6px 12px;font-size:13px;border-radius:8px}
+.btn-logout{background:linear-gradient(135deg,#ff6b6b,#e53935)}
+.table-container{overflow:auto}
+.table-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;gap:10px;flex-wrap:wrap}
+.table-header h2{font-size:22px}
+table{width:100%;border-collapse:collapse}
+#txTable{min-width:1250px}
+th,td{padding:14px 10px;text-align:center;border-bottom:1px solid var(--card-border);white-space:nowrap}
+th{background:var(--soft);color:var(--text-secondary);font-weight:600}
+tbody tr:hover{background:rgba(67,97,238,.05)}
+tfoot tr{background:rgba(58,59,70,.5);font-weight:700}
+body.light-theme tfoot tr{background:rgba(224,224,224,.5)}
+.coin-logo{width:30px;height:30px;vertical-align:middle;border-radius:50%;object-fit:cover}
+.badge-buy,.badge-sell{padding:3px 10px;border-radius:20px;font-size:12px;font-weight:700}
+.badge-buy{background:rgba(78,205,196,.2);color:var(--success)}
+.badge-sell{background:rgba(255,107,107,.2);color:var(--danger)}
+.dashboard-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:30px;gap:15px;flex-wrap:wrap}
+.dashboard-header h1{font-size:28px}
+.dashboard-price-display{background:linear-gradient(135deg,var(--primary),var(--primary-dark));color:#fff;padding:15px 25px;border-radius:15px;font-size:24px;font-weight:700;display:flex;align-items:center;gap:15px;box-shadow:0 5px 15px rgba(67,97,238,.3)}
+.coin-selector-chips{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:30px}
+.coin-chip{padding:10px 20px;background:var(--card-bg);border-radius:50px;cursor:pointer;transition:var(--transition);display:flex;align-items:center;gap:8px;border:1px solid var(--card-border)}
+.coin-chip.active{background:linear-gradient(135deg,var(--primary),var(--primary-dark));color:#fff;border-color:var(--primary)}
+.coin-chip .coin-logo{width:24px;height:24px}
+.cards-container{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:20px;margin-bottom:30px}
+.card{position:relative;overflow:hidden;margin-bottom:0;transition:var(--transition)}
+.card:hover{transform:translateY(-5px);box-shadow:0 8px 25px rgba(0,0,0,.2)}
+.card::before{content:'';position:absolute;top:0;left:0;width:5px;height:100%;background:linear-gradient(to bottom,var(--primary),var(--success))}
+.card h3{margin-bottom:15px;font-size:18px;color:var(--text-secondary);display:flex;align-items:center;gap:10px}
+.card-value{font-size:30px;font-weight:700;margin:10px 0;font-family:'Roboto',sans-serif;letter-spacing:-1px;word-break:break-word}
+.card-value .coin-logo{width:26px;height:26px;margin-right:6px}
+.card-description{color:var(--text-secondary);font-size:14px}
+.chart-container{height:440px;position:relative}
+.chart-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:15px;flex-wrap:wrap;gap:10px}
+.chart-header h2{font-size:22px}
+.chart-actions{display:flex;gap:10px}
+.chart-btn{padding:8px 15px;background:var(--soft);border:none;border-radius:8px;color:var(--text-secondary);font-family:inherit;cursor:pointer;transition:var(--transition)}
+.chart-btn.active{background:var(--primary);color:#fff}
+.chart-box{position:relative;height:calc(100% - 55px)}
+.chart-placeholder{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center;color:var(--text-secondary)}
+.warning{color:var(--text-secondary);font-size:14px}
+.app-footer{text-align:center;padding:20px;color:var(--text-secondary);font-size:14px;border-top:1px solid var(--card-border);margin-top:30px}
+.footer-username{display:inline-flex;align-items:center;gap:5px;font-weight:600;color:var(--primary)}
+.spinner{border:3px solid rgba(255,255,255,.3);border-top-color:#fff;border-radius:50%;width:16px;height:16px;animation:spin 1s linear infinite;display:inline-block}
+.loading-text{display:flex;align-items:center;justify-content:center;gap:10px;padding:10px;color:var(--text-secondary)}
+#toastBox{position:fixed;right:20px;bottom:20px;z-index:9999;display:flex;flex-direction:column;gap:10px;max-width:90vw}
+.toast{padding:14px 20px;border-radius:12px;color:#fff;font-size:15px;box-shadow:0 8px 25px rgba(0,0,0,.4);animation:slideDown .3s ease-out;white-space:pre-line}
+.toast.success{background:#2a9d8f}.toast.error{background:#e53935}.toast.info{background:#4361ee}
+@media(max-width:992px){.tabs{flex-direction:column;border-radius:var(--radius)}.form-row{flex-direction:column}}
+@media(max-width:768px){.price-content{flex-direction:column;align-items:stretch}.dashboard-price-display{width:100%;justify-content:center}}
+</style>
+</head>
+<body>
+
+<!-- ============ LOGIN ============ -->
+<div id="loginPage">
+  <div class="floating-shape shape1"></div>
+  <div class="floating-shape shape2"></div>
+  <div class="floating-shape shape3"></div>
+  <div class="login-box">
+    <div class="logo"><div class="logo-icon">🔐</div></div>
+    <h1>CRYPTO PORTO</h1>
+    <p class="subtitle">Secure Access to Your Portfolio</p>
+    <div id="alertContainer"></div>
+    <div class="input-group">
+      <label for="username">USERNAME</label>
+      <input type="text" id="username" placeholder="Enter your username" autocomplete="username">
+      <span class="input-icon">👤</span>
+    </div>
+    <div class="input-group">
+      <label for="key">PASSWORD</label>
+      <input type="password" id="key" placeholder="Enter your secret key" autocomplete="current-password">
+      <span class="input-icon">🔑</span>
+    </div>
+    <button class="btn-login" id="loginBtn">ACCESS PORTFOLIO</button>
+  </div>
+  <div class="floating-text">PORTO SECURITY SYSTEM • REAL-TIME ENCRYPTION</div>
+</div>
+
+<!-- ============ PORTFOLIO ============ -->
+<div id="portfolioPage" class="hidden">
+  <div class="container">
+    <header class="app-header">
+      <div class="app-title">
+        <div class="app-logo"><i class="fas fa-coins"></i></div>
+        <h1>PORTO REALTIME</h1>
+      </div>
+      <div class="header-actions">
+        <div id="currentUsername" class="username-container"></div>
+        <button class="theme-toggle" id="themeToggle" title="Toggle theme"><i class="fas fa-moon"></i></button>
+        <button class="btn btn-logout" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Logout</button>
+      </div>
+    </header>
+
+    <div class="tabs">
+      <div class="tab active" data-tab="transactions"><i class="fas fa-exchange-alt"></i> Transactions</div>
+      <div class="tab" data-tab="dashboard"><i class="fas fa-chart-line"></i> Dashboard</div>
+    </div>
+
+    <!-- Transactions -->
+    <div id="transactions" class="tab-content active">
+      <div class="price-card">
+        <div class="price-header"><h3><i class="fas fa-chart-line"></i> Coin Price Tracker</h3></div>
+        <div class="price-content">
+          <div class="currency-selector">
+            <select id="currencySelector">
+              <option value="IDR">IDR (Rp)</option><option value="USD">USD ($)</option><option value="EUR">EUR (€)</option>
+              <option value="GBP">GBP (£)</option><option value="JPY">JPY (¥)</option><option value="AUD">AUD (A$)</option>
+              <option value="CAD">CAD (C$)</option><option value="CHF">CHF (CHF)</option><option value="SEK">SEK (kr)</option>
+              <option value="NOK">NOK (kr)</option>
+            </select>
+          </div>
+          <div class="coin-selector"><select id="priceCoinSelector"><option value="">Loading coins...</option></select></div>
+          <div class="coin-price-display">
+            <span class="price-label">Current Price:</span>
+            <span id="priceDisplay" class="price-value">Select a coin</span>
+            <span id="priceIndicator" class="price-indicator"></span>
+            <span id="hourChange" class="hour-change"></span>
+            <span id="apiStatus" class="api-status"></span>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-section">
+        <h3><i class="fas fa-plus-circle"></i> Add Single Transaction</h3>
+        <form id="transactionForm">
+          <div class="form-row">
+            <div class="form-group"><label for="date">Date</label><input type="date" id="date" class="form-control" required></div>
+            <div class="form-group"><label for="coin">Coin</label><select id="coin" class="form-control" required><option value="">Loading coins...</option></select></div>
+            <div class="form-group"><label for="type">Type</label><select id="type" class="form-control"><option value="buy">Buy</option><option value="sell">Sell</option></select></div>
+          </div>
+          <div class="form-row">
+            <div class="form-group"><label for="price">Price (IDR)</label><input type="number" id="price" class="form-control" step="any" min="0" placeholder="Price per coin" required></div>
+            <div class="form-group"><label for="modalBeli">Investment (IDR)</label><input type="number" id="modalBeli" class="form-control" step="any" min="0" placeholder="Total investment" required></div>
+            <div class="form-group" style="align-self:flex-end"><button type="submit" class="btn" id="addBtn"><i class="fas fa-plus"></i> Add Transaction</button></div>
+          </div>
+        </form>
+      </div>
+
+      <div class="form-section">
+        <h3><i class="fas fa-file-import"></i> Batch Transactions</h3>
+        <form id="batchForm">
+          <div class="form-group">
+            <label for="batchInput">Format CSV: DATE,COIN,TYPE,HARGA BELI,MODAL BELI (satu transaksi per baris)</label>
+            <textarea id="batchInput" class="form-control" rows="5" placeholder="Contoh: 2025-07-07,BTC,buy,1762332734,1000000"></textarea>
+          </div>
+          <div id="batchError" style="color:var(--danger);margin:15px 0;white-space:pre-line"></div>
+          <button type="submit" class="btn" id="batchBtn"><i class="fas fa-upload"></i> Add Batch Transactions</button>
+        </form>
+      </div>
+
+      <div class="table-container">
+        <div class="table-header">
+          <h2><i class="fas fa-table"></i> Transaction History</h2>
+          <button id="clearTransactions" class="btn btn-danger"><i class="fas fa-trash-alt"></i> Clear All</button>
+        </div>
+        <table id="txTable">
+          <thead>
+            <tr><th>DATE</th><th>LOGO</th><th>Coin Name</th><th>Code</th><th>Type</th><th>Investment</th><th>Price</th><th>Quantity</th><th>Current Value</th><th>Profit %</th><th>P&amp;L</th><th>Action</th></tr>
+          </thead>
+          <tbody id="transactionTable"></tbody>
+          <tfoot>
+            <tr>
+              <td colspan="8">TOTAL PORTFOLIO (holdings saat ini)</td>
+              <td id="totalValue">Rp0</td><td></td><td id="totalPNLValue">Rp0</td><td></td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+
+      <div class="form-section">
+        <div class="warning"><i class="fas fa-exclamation-circle"></i> Harga realtime diambil dari CoinGecko, otomatis pindah ke Binance jika gagal. Semua transaksi tersimpan di Google Sheets dan dihitung dalam IDR.</div>
+      </div>
+    </div>
+
+    <!-- Dashboard -->
+    <div id="dashboard" class="tab-content">
+      <div class="dashboard-header">
+        <h1><i class="fas fa-chart-pie"></i> Portfolio Dashboard</h1>
+        <div class="dashboard-price-display">
+          <span id="dashboardPriceValue">Rp0</span>
+          <span id="dashboardPriceIndicator" class="price-indicator"></span>
+        </div>
+      </div>
+      <div class="coin-selector-chips" id="coinSelector"></div>
+      <div class="cards-container">
+        <div class="card"><h3><i class="fas fa-wallet"></i> Total Investment</h3><div id="totalInvestment" class="card-value">Rp0</div><p class="card-description">Modal dari koin yang masih dipegang</p></div>
+        <div class="card"><h3><i class="fas fa-chart-bar"></i> Current Value</h3><div id="currentValue" class="card-value">Rp0</div><p class="card-description">Nilai portfolio saat ini</p></div>
+        <div class="card"><h3><i class="fas fa-money-bill-wave"></i> Profit/Loss</h3><div id="profitLoss" class="card-value">Rp0</div><p class="card-description">Total unrealized P&amp;L</p></div>
+        <div class="card"><h3><i class="fas fa-trophy"></i> Best Performer</h3><div id="bestPerformer" class="card-value">-</div><p class="card-description">Koin dengan return tertinggi</p></div>
+        <div class="card"><h3><i class="fas fa-percentage"></i> Profit Percentage</h3><div id="profitPercentage" class="card-value">0%</div><p class="card-description">Persentase untung/rugi dari modal</p></div>
+        <div class="card"><h3><i class="fas fa-calculator"></i> Average Price</h3><div id="averagePrice" class="card-value">-</div><p class="card-description">Rata-rata harga beli (pilih 1 koin)</p></div>
+      </div>
+      <div class="chart-container">
+        <div class="chart-header">
+          <h2><i class="fas fa-chart-line"></i> Portfolio Performance</h2>
+          <div class="chart-actions">
+            <button id="showValueChart" class="chart-btn active" data-chart="value">Value</button>
+            <button id="showInvestmentChart" class="chart-btn" data-chart="investment">Investment</button>
+            <button id="showHoldingsChart" class="chart-btn" data-chart="holdings">Holdings</button>
+          </div>
+        </div>
+        <div class="chart-box">
+          <canvas id="performanceChart"></canvas>
+          <div id="chartPlaceholder" class="chart-placeholder"><h3>No data available</h3><p>Add transactions to see performance chart</p></div>
+        </div>
+      </div>
+      <div class="table-container">
+        <div class="table-header"><h2><i class="fas fa-history"></i> Recent Transactions</h2></div>
+        <table id="recentTransactions" style="min-width:700px">
+          <thead><tr><th>Date</th><th>Coin</th><th>Type</th><th>Price</th><th>Amount</th><th>Value</th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </div>
+
+    <footer class="app-footer">
+      <p>© 2025 Real-time PORTO Powered by Stev | Logged in as: <span id="footerUsername" class="footer-username">Guest</span></p>
+    </footer>
+  </div>
+</div>
+
+<div id="toastBox"></div>
+
+<script>
+(function () {
+'use strict';
+
+/* ======================= KONFIGURASI ======================= */
+const API_URL = '/api/gas';              // proxy Vercel -> Apps Script
+const SESSION_KEY = 'porto_session';
+const COINLIST_KEY = 'porto_coinlist_v2';
+const THEME_KEY = 'portfolio-theme';
+const REFRESH_MS = 30000;
+
+const CURRENCY_LOCALES = { IDR:'id-ID', USD:'en-US', EUR:'en-US', GBP:'en-GB', JPY:'ja-JP', AUD:'en-AU', CAD:'en-CA', CHF:'de-CH', SEK:'sv-SE', NOK:'nb-NO' };
+
+const BASE_COINS = [
+  { id:'bitcoin', symbol:'BTC', name:'Bitcoin' },
+  { id:'ethereum', symbol:'ETH', name:'Ethereum' },
+  { id:'binancecoin', symbol:'BNB', name:'BNB' },
+  { id:'solana', symbol:'SOL', name:'Solana' },
+  { id:'ripple', symbol:'XRP', name:'XRP' },
+  { id:'dogecoin', symbol:'DOGE', name:'Dogecoin' },
+  { id:'cardano', symbol:'ADA', name:'Cardano' }
+];
+// Koin tambahan. "id" = API ID di coingecko.com (halaman koin > "API ID"). Edit di sini jika ada yang tidak muncul harganya.
+const EXTRA_COINS = [
+  { id:'zora', symbol:'ZORA', name:'Zora' },
+  { id:'troll-2', symbol:'TROLL', name:'Troll (Solana)' },
+  { id:'jelly-my-jelly', symbol:'JELLYJELLY', name:'Jelly-My-Jelly' },
+  { id:'moonpig', symbol:'MOONPIG', name:'MoonPig' },
+  { id:'ethena', symbol:'ENA', name:'Ethena' },
+  { id:'pudgy-penguins', symbol:'PENGU', name:'Pudgy Penguins' },
+  { id:'fartcoin', symbol:'FARTCOIN', name:'Fartcoin' }
+];
+
+/* ======================= STATE ======================= */
+const S = {
+  session: null, transactions: [], coins: [],
+  prices: {}, prevPrices: {}, tracker: {}, prevTracker: {}, changes: {},
+  selectedCoin: '', trackerCoin: 'BTC', currency: 'IDR', chartType: 'value',
+  apiName: '-', apiState: 'live', priceBusy: false, timer: null, chart: null
+};
+const $ = id => document.getElementById(id);
+
+/* ======================= UTIL ======================= */
+function toast(msg, type) {
+  const el = document.createElement('div');
+  el.className = 'toast ' + (type || 'info');
+  el.textContent = msg;
+  $('toastBox').appendChild(el);
+  setTimeout(() => el.remove(), 4500);
+}
+
+function setBusy(btn, busy) {
+  if (!btn) return;
+  if (busy) {
+    btn.dataset.html = btn.innerHTML;
+    btn.disabled = true;
+    btn.innerHTML = '<span class="spinner"></span> Memproses...';
+  } else {
+    btn.disabled = false;
+    if (btn.dataset.html) btn.innerHTML = btn.dataset.html;
+  }
+}
+
+function fmtMoney(v, cur) {
+  cur = cur || 'IDR';
+  v = Number(v);
+  if (!isFinite(v)) v = 0;
+  const abs = Math.abs(v);
+  let d = (cur === 'IDR' || cur === 'JPY') ? 0 : 2;
+  if (abs > 0 && abs < 1) d = 8; else if (abs >= 1 && abs < 100) d = Math.max(d, 4);
+  try {
+    return new Intl.NumberFormat(CURRENCY_LOCALES[cur] || 'en-US', { style:'currency', currency:cur, minimumFractionDigits:0, maximumFractionDigits:d }).format(v);
+  } catch (e) { return cur + ' ' + v.toFixed(2); }
+}
+const fmtIDR = v => fmtMoney(v, 'IDR');
+const fmtPnl = v => v < 0 ? '(' + fmtIDR(Math.abs(v)) + ')' : '+' + fmtIDR(v);
+
+function placeholderLogo(sym) {
+  const ch = String(sym || '?').charAt(0).toUpperCase().replace(/[^A-Z0-9]/g, '?');
+  const svg = "<svg xmlns='http://www.w3.org/2000/svg' width='30' height='30'><circle cx='15' cy='15' r='15' fill='#4361ee'/><text x='15' y='20' font-size='14' text-anchor='middle' fill='white' font-family='Arial'>" + ch + "</text></svg>";
+  return 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svg);
+}
+function logoImg(coin, symbol) {
+  const img = new Image();
+  img.className = 'coin-logo';
+  img.alt = coin ? coin.name : symbol;
+  img.loading = 'lazy';
+  img.onerror = () => { img.onerror = null; img.src = placeholderLogo(symbol); };
+  img.src = (coin && coin.logo) ? coin.logo : placeholderLogo(symbol);
+  return img;
+}
+function td(text, cls) {
+  const c = document.createElement('td');
+  c.textContent = text;
+  if (cls) c.className = cls;
+  return c;
+}
+function todayStr() {
+  const d = new Date();
+  d.setMinutes(d.getMinutes() - d.getTimezoneOffset());
+  return d.toISOString().slice(0, 10);
+}
+const coinBySymbol = s => S.coins.find(c => c.symbol === s);
+function sortedDesc(list) {
+  return [...list].sort((a, b) => (b.date.localeCompare(a.date)) || String(b.createdAt).localeCompare(String(a.createdAt)));
+}
+function normalize(list) {
+  return (Array.isArray(list) ? list : []).map(t => ({
+    id: String(t.id), date: String(t.date), coin: String(t.coin).toUpperCase(),
+    type: String(t.type).toLowerCase(), quantity: Number(t.quantity), price: Number(t.price),
+    modalBeli: Number(t.modalBeli), createdAt: String(t.createdAt || '')
+  })).filter(t => isFinite(t.quantity) && isFinite(t.price));
+}
+function filteredTx() {
+  return S.selectedCoin ? S.transactions.filter(t => t.coin === S.selectedCoin) : S.transactions;
+}
+
+/* ======================= API (Apps Script via Vercel) ======================= */
+async function api(action, payload) {
+  let res, text;
+  try {
+    res = await fetch(API_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(Object.assign({ action: action, token: S.session ? S.session.token : '' }, payload || {}))
+    });
+    text = await res.text();
+  } catch (e) {
+    throw new Error('Tidak bisa terhubung ke server. Periksa koneksi internet.');
+  }
+  let data;
+  try { data = JSON.parse(text); }
+  catch (e) { throw new Error('Respons server tidak valid (HTTP ' + res.status + '). Cek APPS_SCRIPT_URL & deployment Apps Script.'); }
+  if (!data.ok) {
+    const err = new Error(data.error || 'Terjadi kesalahan server');
+    if (data.code === 'AUTH') { err.silent = true; forceLogout('Sesi berakhir, silakan login ulang.'); }
+    throw err;
+  }
+  return data;
+}
+function reportError(err) { if (!err.silent) toast(err.message, 'error'); }
+
+/* ======================= LOGIN / LOGOUT ======================= */
+function showAlert(message, type) {
+  const box = $('alertContainer');
+  box.innerHTML = '';
+  const a = document.createElement('div');
+  a.className = 'alert alert-' + type;
+  a.textContent = message;
+  box.appendChild(a);
+  setTimeout(() => { if (a.parentNode === box) box.innerHTML = ''; }, 4500);
+}
+
+async function handleLogin() {
+  const username = $('username').value.trim();
+  const key = $('key').value;
+  if (!username || !key) { showAlert('Please enter both username and key!', 'error'); return; }
+  const btn = $('loginBtn');
+  btn.disabled = true;
+  btn.textContent = 'MEMERIKSA...';
+  try {
+    const d = await api('login', { username: username, password: key });
+    S.session = { token: d.token, username: d.username };
+    sessionStorage.setItem(SESSION_KEY, JSON.stringify(S.session));
+    btn.style.background = 'linear-gradient(135deg,#00ff88,#00ccff)';
+    btn.textContent = '✓ ACCESS GRANTED';
+    showAlert('Authentication successful! Redirecting...', 'success');
+    setTimeout(() => { resetLoginButton(); showPortfolio(); }, 800);
+  } catch (err) {
+    resetLoginButton();
+    showAlert(err.message, 'error');
+  }
+}
+function resetLoginButton() {
+  const btn = $('loginBtn');
+  btn.disabled = false;
+  btn.textContent = 'ACCESS PORTFOLIO';
+  btn.style.background = '';
+}
+
+function forceLogout(message) {
+  if (S.timer) { clearInterval(S.timer); S.timer = null; }
+  S.session = null;
+  sessionStorage.removeItem(SESSION_KEY);
+  S.transactions = []; S.prices = {}; S.prevPrices = {}; S.tracker = {}; S.prevTracker = {}; S.changes = {};
+  S.selectedCoin = '';
+  if (S.chart) { S.chart.destroy(); S.chart = null; }
+  $('portfolioPage').classList.add('hidden');
+  $('loginPage').classList.remove('hidden');
+  $('username').value = '';
+  $('key').value = '';
+  resetLoginButton();
+  if (message) showAlert(message, 'error');
+}
+
+async function handleLogout() {
+  if (!confirm('Are you sure you want to logout?')) return;
+  try { await api('logout'); } catch (e) { /* abaikan */ }
+  forceLogout('');
+}
+
+/* ======================= TAMPILAN PORTFOLIO ======================= */
+async function showPortfolio() {
+  $('loginPage').classList.add('hidden');
+  $('portfolioPage').classList.remove('hidden');
+
+  const nameBox = $('currentUsername'), footer = $('footerUsername');
+  nameBox.innerHTML = ''; footer.innerHTML = '';
+  const isDev = S.session.username.toLowerCase() === 'developerxstev';
+  const wrap = document.createElement('div');
+  wrap.className = 'username-with-badge';
+  wrap.appendChild(document.createTextNode(S.session.username));
+  footer.appendChild(document.createTextNode(S.session.username));
+  if (isDev) {
+    const mk = () => { const i = new Image(); i.src = 'https://files.sitestatic.net/assets/imgs/verify_sm.png'; i.alt = 'Verified'; i.title = 'Verified User'; return i; };
+    const sp = document.createElement('span'); sp.className = 'verified-badge'; sp.appendChild(mk());
+    wrap.appendChild(sp);
+    footer.appendChild(mk());
+  }
+  nameBox.appendChild(wrap);
+
+  $('date').value = todayStr();
+  const tb = $('transactionTable');
+  tb.innerHTML = '<tr><td colspan="12"><div class="loading-text"><span class="spinner"></span> Memuat data dari Google Sheets...</div></td></tr>';
+
+  await Promise.all([loadCoinList(), loadTransactions()]);
+  if (!S.session) return;             // sesi habis saat memuat
+  renderAll();
+  await updatePrices();
+
+  if (S.timer) clearInterval(S.timer);
+  S.timer = setInterval(() => { if (!document.hidden && S.session) updatePrices(); }, REFRESH_MS);
+}
+
+async function loadTransactions() {
+  try {
+    const d = await api('list');
+    S.transactions = normalize(d.transactions);
+  } catch (err) {
+    reportError(err);
+    S.transactions = [];
+  }
+}
+
+function renderAll() {
+  updateCoinSelector();
+  updateTransactionTable();
+  updateDashboard();
+}
+
+/* ======================= DAFTAR KOIN ======================= */
+async function loadCoinList() {
+  let list = null, cached = null;
+  try {
+    const c = JSON.parse(localStorage.getItem(COINLIST_KEY) || 'null');
+    if (c && Array.isArray(c.data)) { cached = c.data; if (Date.now() - c.ts < 3600000) list = c.data; }
+  } catch (e) { /* abaikan */ }
+
+  if (!list) {
+    try {
+      const d = await fetchJSON('https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&sparkline=false');
+      if (!Array.isArray(d)) throw new Error('format tidak valid');
+      list = d.map(c => ({ id: c.id, symbol: String(c.symbol).toUpperCase(), name: c.name, logo: c.image }));
+      try { localStorage.setItem(COINLIST_KEY, JSON.stringify({ ts: Date.now(), data: list })); } catch (e) { /* abaikan */ }
+    } catch (e) {
+      console.warn('Gagal memuat daftar koin:', e.message);
+      list = cached || [];
+    }
+  }
+  const seen = new Set();
+  S.coins = [];
+  list.concat(BASE_COINS, EXTRA_COINS).forEach(c => {
+    if (!c || !c.symbol || seen.has(c.symbol)) return;
+    seen.add(c.symbol);
+    S.coins.push({ id: c.id, symbol: c.symbol, name: c.name, logo: c.logo || '' });
+  });
+  populateCoinDropdowns();
+}
+
+function populateCoinDropdowns() {
+  const ps = $('priceCoinSelector'), cs = $('coin');
+  const keepForm = cs.value;
+  ps.innerHTML = ''; cs.innerHTML = '';
+  const mk = (v, t) => { const o = document.createElement('option'); o.value = v; o.textContent = t; return o; };
+  ps.appendChild(mk('', 'Select Coin'));
+  cs.appendChild(mk('', 'Select Coin'));
+  S.coins.forEach(c => {
+    const t = c.name + ' (' + c.symbol + ')';
+    ps.appendChild(mk(c.symbol, t));
+    cs.appendChild(mk(c.symbol, t));
+  });
+  ps.value = S.trackerCoin;
+  if (ps.value !== S.trackerCoin) S.trackerCoin = ps.value;
+  if (keepForm) cs.value = keepForm;
+}
+
+function updateCoinSelector() {
+  const box = $('coinSelector');
+  box.innerHTML = '';
+  const unique = [...new Set(S.transactions.map(t => t.coin))];
+  if (S.selectedCoin && unique.indexOf(S.selectedCoin) === -1) S.selectedCoin = '';
+  if (!unique.length) { const p = document.createElement('p'); p.textContent = 'No coins in portfolio yet'; box.appendChild(p); return; }
+
+  const addChip = (label, sym, coin, icon) => {
+    const chip = document.createElement('div');
+    chip.className = 'coin-chip' + (S.selectedCoin === sym ? ' active' : '');
+    if (icon) { const i = document.createElement('i'); i.className = icon; chip.appendChild(i); }
+    else chip.appendChild(logoImg(coin, sym));
+    chip.appendChild(document.createTextNode(' ' + label));
+    chip.addEventListener('click', () => { S.selectedCoin = sym; updateCoinSelector(); updateTransactionTable(); updateDashboard(); });
+    box.appendChild(chip);
+  };
+  addChip('All Coins', '', null, 'fas fa-coins');
+  unique.forEach(sym => { const c = coinBySymbol(sym); addChip(c ? c.name + ' (' + sym + ')' : sym, sym, c); });
+}
+
+/* ======================= PERHITUNGAN ======================= */
+function buildState(txs) {
+  const s = {};
+  txs.forEach(t => {
+    const c = s[t.coin] || (s[t.coin] = { bought: 0, sold: 0, invested: 0, proceeds: 0 });
+    if (t.type === 'buy') { c.bought += t.quantity; c.invested += t.quantity * t.price; }
+    else { c.sold += t.quantity; c.proceeds += t.quantity * t.price; }
+  });
+  return s;
+}
+function metrics(sym, c) {
+  let holdings = c.bought - c.sold;
+  if (holdings < 1e-12) holdings = 0;
+  const avg = c.bought > 0 ? c.invested / c.bought : 0;
+  const cost = holdings * avg;
+  const price = S.prices[sym];
+  const value = (typeof price === 'number') ? holdings * price : cost;
+  return { holdings: holdings, avg: avg, cost: cost, value: value, pnl: value - cost };
+}
+
+/* ======================= TABEL TRANSAKSI ======================= */
+function updateTransactionTable() {
+  const body = $('transactionTable');
+  body.innerHTML = '';
+  const txs = sortedDesc(filteredTx());
+
+  if (!txs.length) {
+    const row = body.insertRow();
+    const cell = row.insertCell(0);
+    cell.colSpan = 12;
+    cell.textContent = 'Belum ada transaksi. Tambahkan transaksi untuk memulai.';
+    $('totalValue').textContent = fmtIDR(0);
+    $('totalPNLValue').textContent = fmtPnl(0);
+    $('totalPNLValue').className = 'positive';
+    return;
+  }
+
+  txs.forEach(tx => {
+    const coin = coinBySymbol(tx.coin);
+    const price = S.prices[tx.coin];
+    const row = body.insertRow();
+    row.appendChild(td(tx.date));
+    const lg = document.createElement('td'); lg.appendChild(logoImg(coin, tx.coin)); row.appendChild(lg);
+    row.appendChild(td(coin ? coin.name : tx.coin));
+    row.appendChild(td(tx.coin));
+    const tt = document.createElement('td');
+    const bd = document.createElement('span'); bd.className = tx.type === 'buy' ? 'badge-buy' : 'badge-sell'; bd.textContent = tx.type.toUpperCase();
+    tt.appendChild(bd); row.appendChild(tt);
+    row.appendChild(td(fmtIDR(tx.quantity * tx.price)));
+    row.appendChild(td(fmtIDR(tx.price)));
+    row.appendChild(td(tx.quantity.toLocaleString('en-US', { maximumFractionDigits: 8 })));
+
+    if (tx.type === 'buy' && typeof price === 'number') {
+      const val = tx.quantity * price;
+      const pnl = val - tx.quantity * tx.price;
+      const pct = tx.price > 0 ? ((price - tx.price) / tx.price * 100) : 0;
+      row.appendChild(td(fmtIDR(val)));
+      row.appendChild(td(pct.toFixed(2) + '%', pnl < 0 ? 'negative' : 'positive'));
+      row.appendChild(td(fmtPnl(pnl), pnl < 0 ? 'negative' : 'positive'));
+    } else {
+      row.appendChild(td('-')); row.appendChild(td('-')); row.appendChild(td('-'));
+    }
+    const act = document.createElement('td');
+    const del = document.createElement('button');
+    del.className = 'btn btn-danger btn-sm';
+    del.dataset.id = tx.id;
+    del.title = 'Hapus transaksi';
+    del.innerHTML = '<i class="fas fa-trash-alt"></i>';
+    act.appendChild(del); row.appendChild(act);
+  });
+
+  const st = buildState(txs);
+  let totalValue = 0, totalPnl = 0;
+  Object.keys(st).forEach(sym => { const m = metrics(sym, st[sym]); totalValue += m.value; totalPnl += m.pnl; });
+  $('totalValue').textContent = fmtIDR(totalValue);
+  $('totalPNLValue').textContent = fmtPnl(totalPnl);
+  $('totalPNLValue').className = totalPnl < 0 ? 'negative' : 'positive';
+}
+
+/* ======================= DASHBOARD ======================= */
+function updateDashboard() {
+  const txs = filteredTx();
+  const st = buildState(txs);
+  let cost = 0, value = 0, best = null;
+  Object.keys(st).forEach(sym => {
+    const m = metrics(sym, st[sym]);
+    cost += m.cost; value += m.value;
+    if (m.holdings > 0 && m.cost > 0 && typeof S.prices[sym] === 'number') {
+      const pct = m.pnl / m.cost * 100;
+      if (!best || pct > best.pct) best = { sym: sym, pct: pct };
+    }
+  });
+  const pnl = value - cost;
+
+  $('totalInvestment').textContent = fmtIDR(cost);
+  $('currentValue').textContent = fmtIDR(value);
+  $('profitLoss').textContent = fmtPnl(pnl);
+  $('profitLoss').className = 'card-value ' + (pnl < 0 ? 'negative' : 'positive');
+  $('profitPercentage').textContent = (cost > 0 ? pnl / cost * 100 : 0).toFixed(2) + '%';
+
+  const bp = $('bestPerformer');
+  bp.innerHTML = '';
+  if (best) {
+    bp.appendChild(logoImg(coinBySymbol(best.sym), best.sym));
+    bp.appendChild(document.createTextNode(best.sym + ': ' + best.pct.toFixed(2) + '%'));
+  } else bp.textContent = '-';
+
+  let avg = '-';
+  if (S.selectedCoin && st[S.selectedCoin] && st[S.selectedCoin].bought > 0) {
+    avg = fmtIDR(st[S.selectedCoin].invested / st[S.selectedCoin].bought);
+  }
+  $('averagePrice').textContent = avg;
+
+  $('dashboardPriceValue').textContent = fmtIDR(value);
+  const ind = $('dashboardPriceIndicator');
+  ind.textContent = pnl >= 0 ? '↑' : '↓';
+  ind.className = 'price-indicator ' + (pnl >= 0 ? 'positive' : 'negative');
+
+  updateRecent(txs);
+  renderChart(txs);
+}
+
+function updateRecent(txs) {
+  const body = $('recentTransactions').querySelector('tbody');
+  body.innerHTML = '';
+  const recent = sortedDesc(txs).slice(0, 5);
+  if (!recent.length) {
+    const r = body.insertRow(); const c = r.insertCell(0); c.colSpan = 6; c.textContent = 'No transactions yet'; return;
+  }
+  recent.forEach(tx => {
+    const coin = coinBySymbol(tx.coin);
+    const r = body.insertRow();
+    r.appendChild(td(tx.date));
+    const cc = document.createElement('td');
+    cc.appendChild(logoImg(coin, tx.coin));
+    cc.appendChild(document.createTextNode(' ' + tx.coin));
+    r.appendChild(cc);
+    r.appendChild(td(tx.type.toUpperCase(), tx.type === 'buy' ? 'positive' : 'negative'));
+    r.appendChild(td(fmtIDR(tx.price)));
+    r.appendChild(td(tx.quantity.toFixed(6)));
+    r.appendChild(td(fmtIDR(tx.quantity * tx.price)));
+  });
+}
+
+function renderChart(txs) {
+  const canvas = $('performanceChart'), ph = $('chartPlaceholder');
+  if (S.chart) { S.chart.destroy(); S.chart = null; }
+  if (!$('dashboard').classList.contains('active')) return;   // render saat tab dashboard dibuka
+  const noData = () => { canvas.style.display = 'none'; ph.style.display = 'block'; };
+  if (!txs.length || typeof Chart === 'undefined') return noData();
+
+  const light = document.body.classList.contains('light-theme');
+  const txt = light ? '#2a2b36' : '#e0e0e0';
+  const grid = light ? 'rgba(0,0,0,.08)' : 'rgba(255,255,255,.08)';
+  let cfg;
+
+  if (S.chartType === 'holdings') {
+    const st = buildState(txs), labels = [], data = [];
+    Object.keys(st).forEach(sym => { const m = metrics(sym, st[sym]); if (m.holdings > 0 && m.value > 0) { labels.push(sym); data.push(m.value); } });
+    if (!data.length) return noData();
+    const palette = ['#4361ee', '#4ecdc4', '#ff6b6b', '#ffa94d', '#b19eef', '#ffd700', '#2a9d8f', '#e76f51', '#8ecae6', '#c77dff'];
+    cfg = {
+      type: 'doughnut',
+      data: { labels: labels, datasets: [{ data: data, backgroundColor: labels.map((_, i) => palette[i % palette.length]), borderWidth: 0 }] },
+      options: {
+        responsive: true, maintainAspectRatio: false,
+        plugins: { legend: { position: 'right', labels: { color: txt } }, tooltip: { callbacks: { label: c => c.label + ': ' + fmtIDR(c.parsed) } } }
+      }
+    };
+  } else {
+    const dates = [...new Set(txs.map(t => t.date))].sort();
+    const vData = [], iData = [];
+    dates.forEach(d => {
+      const st = buildState(txs.filter(t => t.date <= d));
+      let v = 0, c = 0;
+      Object.keys(st).forEach(sym => { const m = metrics(sym, st[sym]); v += m.value; c += m.cost; });
+      vData.push(v); iData.push(c);
+    });
+    const ds = [];
+    if (S.chartType === 'value') ds.push({ label: 'Portfolio Value', data: vData, backgroundColor: 'rgba(78,205,196,.2)', borderColor: '#4ecdc4', borderWidth: 2, pointRadius: 4, tension: .3, fill: true });
+    ds.push({ label: 'Total Investment', data: iData, backgroundColor: 'rgba(255,107,107,.2)', borderColor: '#ff6b6b', borderWidth: 2, pointRadius: 4, tension: .3, fill: true });
+    cfg = {
+      type: 'line', data: { labels: dates, datasets: ds },
+      options: {
+        responsive: true, maintainAspectRatio: false,
+        scales: {
+          x: { ticks: { color: txt }, grid: { color: grid }, title: { display: true, text: 'Date', color: txt } },
+          y: { ticks: { color: txt, callback: v => fmtIDR(v) }, grid: { color: grid }, title: { display: true, text: 'Value (IDR)', color: txt } }
+        },
+        plugins: { legend: { position: 'top', labels: { color: txt } }, tooltip: { callbacks: { label: c => (c.dataset.label || '') + ': ' + fmtIDR(c.parsed.y) } } }
+      }
+    };
+  }
+  canvas.style.display = 'block';
+  ph.style.display = 'none';
+  S.chart = new Chart(canvas, cfg);
+}
+
+/* ======================= HARGA REALTIME ======================= */
+async function fetchJSON(url, timeoutMs) {
+  const ctrl = new AbortController();
+  const t = setTimeout(() => ctrl.abort(), timeoutMs || 12000);
+  try {
+    const r = await fetch(url, { signal: ctrl.signal });
+    if (!r.ok) throw new Error('HTTP ' + r.status);
+    return await r.json();
+  } finally { clearTimeout(t); }
+}
+
+function neededCoins() {
+  const syms = new Set(S.transactions.map(t => t.coin));
+  if (S.trackerCoin) syms.add(S.trackerCoin);
+  return [...syms].map(coinBySymbol).filter(Boolean);
+}
+
+async function fetchFromCoinGecko(list, cur) {
+  const k = cur.toLowerCase();
+  const vs = k === 'idr' ? 'idr' : 'idr,' + k;
+  const ids = list.map(c => c.id).join(',');
+  const d = await fetchJSON('https://api.coingecko.com/api/v3/simple/price?ids=' + encodeURIComponent(ids) + '&vs_currencies=' + vs + '&include_24hr_change=true');
+  const idr = {}, sel = {}, chg = {};
+  list.forEach(c => {
+    const o = d && d[c.id];
+    if (!o) return;
+    if (typeof o.idr === 'number') idr[c.symbol] = o.idr;
+    if (typeof o[k] === 'number') sel[c.symbol] = o[k];
+    if (typeof o[k + '_24h_change'] === 'number') chg[c.symbol] = o[k + '_24h_change'];
+  });
+  if (!Object.keys(idr).length) throw new Error('data kosong');
+  return { idr: idr, sel: sel, chg: chg };
+}
+
+async function fetchFromBinance(list, cur) {
+  const res = await Promise.all([fetchJSON('https://open.er-api.com/v6/latest/USD'), fetchJSON('https://api.binance.com/api/v3/ticker/price', 15000)]);
+  const rates = res[0] && res[0].rates, all = res[1];
+  if (!rates || !rates.IDR || !Array.isArray(all)) throw new Error('data tidak lengkap');
+  const usd = {};
+  all.forEach(i => { if (i.symbol.endsWith('USDT')) usd[i.symbol.slice(0, -4)] = parseFloat(i.price); });
+  const idr = {}, sel = {};
+  list.forEach(c => {
+    const p = usd[c.symbol];
+    if (!p) return;
+    idr[c.symbol] = p * rates.IDR;
+    if (rates[cur]) sel[c.symbol] = p * rates[cur];
+  });
+  if (!Object.keys(idr).length) throw new Error('data kosong');
+  return { idr: idr, sel: sel, chg: {} };
+}
+
+async function updatePrices() {
+  if (S.priceBusy || !S.session) return;
+  S.priceBusy = true;
+  const cur = S.currency;
+  try {
+    const list = neededCoins();
+    let result = null, source = '';
+    if (list.length) {
+      const sources = [['CoinGecko', fetchFromCoinGecko], ['Binance', fetchFromBinance]];
+      for (let a = 0; a < 2 && !result; a++) {
+        for (let i = 0; i < sources.length && !result; i++) {
+          try { result = await sources[i][1](list, cur); source = sources[i][0]; }
+          catch (e) { console.log('Gagal ' + sources[i][0] + ': ' + e.message); }
+        }
+        if (!result && a === 0) await new Promise(r => setTimeout(r, 1000));
+      }
+    }
+    if (!S.session || cur !== S.currency) return;   // logout / ganti mata uang saat menunggu
+
+    if (result) {
+      Object.keys(result.idr).forEach(sym => { S.prevPrices[sym] = S.prices[sym]; S.prices[sym] = result.idr[sym]; });
+      Object.keys(result.sel).forEach(sym => { S.prevTracker[sym] = S.tracker[sym]; S.tracker[sym] = result.sel[sym]; });
+      Object.keys(result.chg).forEach(sym => { S.changes[sym] = result.chg[sym]; });
+      S.apiName = source; S.apiState = 'live';
+    } else if (list.length) {
+      S.apiName = 'Fallback'; S.apiState = 'fallback';
+    }
+    const st = $('apiStatus');
+    st.textContent = list.length ? 'via ' + S.apiName : '';
+    st.className = 'api-status ' + S.apiState;
+    updatePriceDisplay();
+    updateTransactionTable();
+    updateDashboard();
+  } catch (err) {
+    console.error('updatePrices:', err);
+    const st = $('apiStatus'); st.textContent = 'Error'; st.className = 'api-status error';
+  } finally { S.priceBusy = false; }
+}
+
+function updatePriceDisplay() {
+  const pd = $('priceDisplay'), pi = $('priceIndicator'), hc = $('hourChange');
+  const sym = S.trackerCoin;
+  if (!sym) { pd.textContent = 'Select a coin'; pi.textContent = ''; pi.className = 'price-indicator'; hc.textContent = ''; hc.className = 'hour-change'; return; }
+  const cur = S.tracker[sym], prev = S.prevTracker[sym];
+  if (typeof cur !== 'number') { pd.textContent = 'Memuat harga...'; pi.textContent = ''; hc.textContent = ''; hc.className = 'hour-change'; return; }
+  pd.textContent = fmtMoney(cur, S.currency);
+  if (typeof prev === 'number' && prev !== cur) { pi.textContent = cur > prev ? '↑' : '↓'; pi.className = 'price-indicator ' + (cur > prev ? 'positive' : 'negative'); }
+  else if (typeof prev === 'number') { pi.textContent = '→'; pi.className = 'price-indicator'; }
+  else { pi.textContent = ''; pi.className = 'price-indicator'; }
+  const ch = S.changes[sym];
+  if (typeof ch === 'number') { hc.textContent = (ch >= 0 ? '+' : '') + ch.toFixed(2) + '% (24h)'; hc.className = 'hour-change ' + (ch >= 0 ? 'positive' : 'negative'); }
+  else { hc.textContent = ''; hc.className = 'hour-change'; }
+}
+
+/* ======================= AKSI DATA ======================= */
+async function onAddSingle(e) {
+  e.preventDefault();
+  const date = $('date').value, coin = $('coin').value, type = $('type').value;
+  const price = parseFloat($('price').value), modal = parseFloat($('modalBeli').value);
+  if (!coin) return toast('Pilih koin terlebih dahulu', 'error');
+  if (!date) return toast('Tanggal wajib diisi', 'error');
+  if (!isFinite(price) || price <= 0) return toast('Harga harus lebih dari 0', 'error');
+  if (!isFinite(modal) || modal <= 0) return toast('Nominal investasi harus lebih dari 0', 'error');
+  const btn = $('addBtn');
+  setBusy(btn, true);
+  try {
+    const d = await api('add', { item: { date: date, coin: coin, type: type, price: price, modalBeli: modal } });
+    S.transactions = normalize(d.transactions);
+    $('transactionForm').reset();
+    $('date').value = todayStr();
+    renderAll();
+    toast('Transaksi tersimpan di Google Sheets', 'success');
+    updatePrices();
+  } catch (err) { reportError(err); }
+  finally { setBusy(btn, false); }
+}
+
+async function onAddBatch(e) {
+  e.preventDefault();
+  const errBox = $('batchError');
+  errBox.textContent = '';
+  const raw = $('batchInput').value.trim();
+  if (!raw) { errBox.textContent = 'Masukkan minimal satu transaksi.'; return; }
+
+  const items = [], errors = [];
+  raw.split(/\r?\n/).forEach((line, idx) => {
+    line = line.trim();
+    if (!line) return;
+    if (/^date\s*,/i.test(line)) return;     // lewati header
+    const n = idx + 1;
+    const p = line.split(',').map(s => s.trim());
+    if (p.length !== 5) { errors.push('Baris ' + n + ': format salah. Harus: date,coin,type,harga,modal'); return; }
+    const date = p[0], coin = p[1].toUpperCase(), type = p[2].toLowerCase(), price = parseFloat(p[3]), modal = parseFloat(p[4]);
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(date)) { errors.push('Baris ' + n + ': tanggal harus YYYY-MM-DD'); return; }
+    if (type !== 'buy' && type !== 'sell') { errors.push('Baris ' + n + ": type harus 'buy' atau 'sell'"); return; }
+    if (!isFinite(price) || price <= 0) { errors.push('Baris ' + n + ': harga harus angka > 0'); return; }
+    if (!isFinite(modal) || modal <= 0) { errors.push('Baris ' + n + ': modal harus angka > 0'); return; }
+    if (!coinBySymbol(coin)) { errors.push('Baris ' + n + ': koin "' + coin + '" tidak dikenal'); return; }
+    items.push({ date: date, coin: coin, type: type, price: price, modalBeli: modal });
+  });
+  if (errors.length) { errBox.textContent = errors.slice(0, 15).join('\n') + (errors.length > 15 ? '\n...dan ' + (errors.length - 15) + ' error lain' : ''); return; }
+  if (!items.length) { errBox.textContent = 'Tidak ada transaksi valid.'; return; }
+  if (items.length > 500) { errBox.textContent = 'Maksimal 500 transaksi per batch.'; return; }
+
+  const btn = $('batchBtn');
+  setBusy(btn, true);
+  try {
+    const d = await api('addBatch', { items: items });
+    S.transactions = normalize(d.transactions);
+    $('batchInput').value = '';
+    renderAll();
+    toast(items.length + ' transaksi tersimpan', 'success');
+    updatePrices();
+  } catch (err) { if (!err.silent) errBox.textContent = err.message; }
+  finally { setBusy(btn, false); }
+}
+
+async function onClearAll() {
+  if (!S.transactions.length) return toast('Tidak ada transaksi untuk dihapus', 'info');
+  if (!confirm('Hapus SEMUA transaksi Anda dari Google Sheets? Tindakan ini tidak bisa dibatalkan.')) return;
+  const btn = $('clearTransactions');
+  setBusy(btn, true);
+  try {
+    const d = await api('clear');
+    S.transactions = normalize(d.transactions);
+    S.selectedCoin = '';
+    renderAll();
+    toast('Semua transaksi dihapus', 'success');
+  } catch (err) { reportError(err); }
+  finally { setBusy(btn, false); }
+}
+
+async function onDeleteRow(e) {
+  const btn = e.target.closest('button[data-id]');
+  if (!btn) return;
+  if (!confirm('Hapus transaksi ini?')) return;
+  btn.disabled = true;
+  try {
+    const d = await api('delete', { id: btn.dataset.id });
+    S.transactions = normalize(d.transactions);
+    renderAll();
+    toast('Transaksi dihapus', 'success');
+  } catch (err) { btn.disabled = false; reportError(err); }
+}
+
+/* ======================= INISIALISASI ======================= */
+function applyTheme(theme) {
+  const icon = $('themeToggle').querySelector('i');
+  const light = theme === 'light';
+  document.body.classList.toggle('light-theme', light);
+  icon.className = light ? 'fas fa-sun' : 'fas fa-moon';
+}
+
+function createAuroraParticles() {
+  const page = $('loginPage');
+  for (let i = 0; i < 50; i++) {
+    const p = document.createElement('div');
+    p.className = 'aurora-particle';
+    const size = Math.random() * 4 + 2;
+    p.style.cssText = 'left:' + Math.random() * 100 + '%;top:' + Math.random() * 100 + '%;width:' + size + 'px;height:' + size + 'px;opacity:' + (Math.random() * 0.5 + 0.3) +
+      ';background:' + (i % 2 ? 'rgba(82,39,255,.6)' : 'rgba(255,159,252,.6)') +
+      ';animation:float ' + (Math.random() * 20 + 10) + 's ease-in-out ' + (Math.random() * 5) + 's infinite';
+    page.appendChild(p);
+  }
+}
+
+function init() {
+  createAuroraParticles();
+  let theme = 'dark';
+  try { theme = localStorage.getItem(THEME_KEY) || 'dark'; } catch (e) { /* abaikan */ }
+  applyTheme(theme);
+
+  // Login
+  $('loginBtn').addEventListener('click', handleLogin);
+  ['username', 'key'].forEach(id => $(id).addEventListener('keydown', e => { if (e.key === 'Enter') handleLogin(); }));
+  $('logoutBtn').addEventListener('click', handleLogout);
+  document.querySelectorAll('#loginPage input').forEach(inp => {
+    const icon = () => inp.parentElement.querySelector('.input-icon');
+    inp.addEventListener('focus', () => { icon().style.transform = 'scale(1.3) rotate(10deg)'; });
+    inp.addEventListener('blur', () => { icon().style.transform = ''; });
+  });
+
+  // Tema
+  $('themeToggle').addEventListener('click', () => {
+    const next = document.body.classList.contains('light-theme') ? 'dark' : 'light';
+    applyTheme(next);
+    try { localStorage.setItem(THEME_KEY, next); } catch (e) { /* abaikan */ }
+    updateDashboard();
+  });
+
+  // Tab
+  document.querySelectorAll('.tab').forEach(tab => tab.addEventListener('click', () => {
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+    tab.classList.add('active');
+    $(tab.dataset.tab).classList.add('active');
+    if (tab.dataset.tab === 'dashboard') updateDashboard();
+  }));
+
+  // Form & tabel
+  $('transactionForm').addEventListener('submit', onAddSingle);
+  $('batchForm').addEventListener('submit', onAddBatch);
+  $('clearTransactions').addEventListener('click', onClearAll);
+  $('transactionTable').addEventListener('click', onDeleteRow);
+
+  // Chart
+  document.querySelectorAll('.chart-btn').forEach(btn => btn.addEventListener('click', () => {
+    S.chartType = btn.dataset.chart;
+    document.querySelectorAll('.chart-btn').forEach(b => b.classList.toggle('active', b === btn));
+    renderChart(filteredTx());
+  }));
+
+  // Tracker
+  $('currencySelector').addEventListener('change', function () {
+    S.currency = this.value;
+    S.tracker = {}; S.prevTracker = {}; S.changes = {};
+    updatePriceDisplay();
+    updatePrices();
+  });
+  $('priceCoinSelector').addEventListener('change', function () {
+    S.trackerCoin = this.value;
+    updatePriceDisplay();
+    if (S.trackerCoin && typeof S.tracker[S.trackerCoin] !== 'number') updatePrices();
+  });
+
+  // Restore sesi
+  try {
+    const saved = JSON.parse(sessionStorage.getItem(SESSION_KEY) || 'null');
+    if (saved && saved.token && saved.username) { S.session = saved; showPortfolio(); }
+  } catch (e) { sessionStorage.removeItem(SESSION_KEY); }
+}
+
+document.addEventListener('DOMContentLoaded', init);
+})();
+</script>
+</body>
+</html>
