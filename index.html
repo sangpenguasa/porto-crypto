@@ -248,8 +248,8 @@ body.light-theme tfoot tr{background:rgba(224,224,224,.5)}
         <h3><i class="fas fa-file-import"></i> Batch Transactions</h3>
         <form id="batchForm">
           <div class="form-group">
-            <label for="batchInput">Format CSV: DATE,COIN,TYPE,HARGA BELI,MODAL BELI (satu transaksi per baris)</label>
-            <textarea id="batchInput" class="form-control" rows="5" placeholder="Contoh: 2025-07-07,BTC,buy,1762332734,1000000"></textarea>
+            <label for="batchInput">Format: DATE, COIN, TYPE, HARGA BELI, MODAL BELI (1 transaksi per baris). Nominal dalam <b id="batchCurrency">IDR</b>. Pemisah kolom: koma, titik koma (;) atau tab. Angka boleh 1.000.000 atau 62.534,5 (jika pakai koma desimal, pisahkan kolom dengan ; atau tab).</label>
+            <textarea id="batchInput" class="form-control" rows="5" placeholder="Contoh:&#10;2025-07-07,BTC,buy,1762332734,1000000&#10;07/07/2025;ETH;beli;54.321.000,5;500.000"></textarea>
           </div>
           <div id="batchError" style="color:var(--danger);margin:15px 0;white-space:pre-line"></div>
           <button type="submit" class="btn" id="batchBtn"><i class="fas fa-upload"></i> Add Batch Transactions</button>
@@ -276,7 +276,7 @@ body.light-theme tfoot tr{background:rgba(224,224,224,.5)}
       </div>
 
       <div class="form-section">
-        <div class="warning"><i class="fas fa-exclamation-circle"></i> Harga realtime diambil dari CoinGecko, otomatis pindah ke Binance jika gagal. Semua transaksi tersimpan di Google Sheets dan dihitung dalam IDR.</div>
+        <div class="warning"><i class="fas fa-exclamation-circle"></i> Harga realtime diambil dari CoinGecko, otomatis pindah ke Binance jika gagal. Transaksi tersimpan di Google Sheets (dalam IDR) dan otomatis dikonversi ke mata uang yang dipilih di Price Tracker, termasuk saat mengisi form.</div>
       </div>
     </div>
 
@@ -367,7 +367,7 @@ const S = {
   session: null, transactions: [], coins: [],
   prices: {}, prevPrices: {}, tracker: {}, prevTracker: {}, changes: {},
   selectedCoin: '', trackerCoin: 'BTC', currency: 'IDR', chartType: 'value',
-  apiName: '-', apiState: 'live', priceBusy: false, timer: null, chart: null
+  apiName: '-', apiState: 'live', priceBusy: false, timer: null, chart: null, fx: null
 };
 const $ = id => document.getElementById(id);
 
@@ -398,13 +398,45 @@ function fmtMoney(v, cur) {
   if (!isFinite(v)) v = 0;
   const abs = Math.abs(v);
   let d = (cur === 'IDR' || cur === 'JPY') ? 0 : 2;
-  if (abs > 0 && abs < 1) d = 8; else if (abs >= 1 && abs < 100) d = Math.max(d, 4);
+  if (abs > 0 && abs < 1) d = 8; else if (abs >= 1 && abs < 100 && (cur === 'IDR' || cur === 'JPY')) d = 4;
   try {
     return new Intl.NumberFormat(CURRENCY_LOCALES[cur] || 'en-US', { style:'currency', currency:cur, minimumFractionDigits:0, maximumFractionDigits:d }).format(v);
   } catch (e) { return cur + ' ' + v.toFixed(2); }
 }
-const fmtIDR = v => fmtMoney(v, 'IDR');
+// Faktor konversi IDR -> mata uang terpilih (data selalu disimpan dalam IDR)
+function fx() {
+  if (S.currency === 'IDR') return 1;
+  const r = S.fx && S.fx.rates;
+  return (r && r.IDR && r[S.currency]) ? r[S.currency] / r.IDR : 1;
+}
+const fmtIDR = v => fmtMoney(Number(v) * fx(), S.currency);
 const fmtPnl = v => v < 0 ? '(' + fmtIDR(Math.abs(v)) + ')' : '+' + fmtIDR(v);
+
+const FX_KEY = 'porto_fx_v1';
+async function ensureRates() {
+  const now = Date.now(), TTL = 6 * 3600 * 1000;
+  if (S.fx && now - S.fx.ts < TTL) return true;
+  try {
+    const c = JSON.parse(localStorage.getItem(FX_KEY) || 'null');
+    if (c && c.rates && now - c.ts < TTL) { S.fx = c; return true; }
+  } catch (e) { /* abaikan */ }
+  try {
+    const d = await fetchJSON('https://open.er-api.com/v6/latest/USD');
+    if (!d || !d.rates || !d.rates.IDR) throw new Error('kurs kosong');
+    S.fx = { ts: now, rates: d.rates };
+    try { localStorage.setItem(FX_KEY, JSON.stringify(S.fx)); } catch (e) { /* abaikan */ }
+    return true;
+  } catch (e) {
+    console.warn('Gagal memuat kurs:', e.message);
+    return !!(S.fx && S.fx.rates);
+  }
+}
+function syncCurrencyLabels() {
+  const c = S.currency;
+  document.querySelector('label[for="price"]').textContent = 'Price (' + c + ')';
+  document.querySelector('label[for="modalBeli"]').textContent = 'Investment (' + c + ')';
+  $('batchCurrency').textContent = c;
+}
 
 function placeholderLogo(sym) {
   const ch = String(sym || '?').charAt(0).toUpperCase().replace(/[^A-Z0-9]/g, '?');
@@ -554,8 +586,13 @@ async function showPortfolio() {
   const tb = $('transactionTable');
   tb.innerHTML = '<tr><td colspan="12"><div class="loading-text"><span class="spinner"></span> Memuat data dari Google Sheets...</div></td></tr>';
 
-  await Promise.all([loadCoinList(), loadTransactions()]);
+  await Promise.all([loadCoinList(), loadTransactions(), ensureRates()]);
   if (!S.session) return;             // sesi habis saat memuat
+  if (S.currency !== 'IDR' && !(S.fx && S.fx.rates && S.fx.rates[S.currency])) {
+    S.currency = 'IDR'; $('currencySelector').value = 'IDR';
+    toast('Kurs gagal dimuat, kembali ke IDR.', 'info');
+  }
+  syncCurrencyLabels();
   renderAll();
   await updatePrices();
 
@@ -832,7 +869,7 @@ function renderChart(txs) {
         responsive: true, maintainAspectRatio: false,
         scales: {
           x: { ticks: { color: txt }, grid: { color: grid }, title: { display: true, text: 'Date', color: txt } },
-          y: { ticks: { color: txt, callback: v => fmtIDR(v) }, grid: { color: grid }, title: { display: true, text: 'Value (IDR)', color: txt } }
+          y: { ticks: { color: txt, callback: v => fmtIDR(v) }, grid: { color: grid }, title: { display: true, text: 'Value (' + S.currency + ')', color: txt } }
         },
         plugins: { legend: { position: 'top', labels: { color: txt } }, tooltip: { callbacks: { label: c => (c.dataset.label || '') + ': ' + fmtIDR(c.parsed.y) } } }
       }
@@ -930,7 +967,10 @@ async function updatePrices() {
   } catch (err) {
     console.error('updatePrices:', err);
     const st = $('apiStatus'); st.textContent = 'Error'; st.className = 'api-status error';
-  } finally { S.priceBusy = false; }
+  } finally {
+    S.priceBusy = false;
+    if (S.session && cur !== S.currency) setTimeout(updatePrices, 0);
+  }
 }
 
 function updatePriceDisplay() {
@@ -960,7 +1000,8 @@ async function onAddSingle(e) {
   const btn = $('addBtn');
   setBusy(btn, true);
   try {
-    const d = await api('add', { item: { date: date, coin: coin, type: type, price: price, modalBeli: modal } });
+    const f = fx();
+    const d = await api('add', { item: { date: date, coin: coin, type: type, price: price / f, modalBeli: modal / f } });
     S.transactions = normalize(d.transactions);
     $('transactionForm').reset();
     $('date').value = todayStr();
@@ -971,6 +1012,56 @@ async function onAddSingle(e) {
   finally { setBusy(btn, false); }
 }
 
+const COIN_ALIASES = { FART: 'FARTCOIN', TROLLSOL: 'TROLL' };
+
+// Mengerti format Indonesia (1.000.000 / 62.534,5) maupun internasional (1,000,000 / 62534.5)
+function parseNum(raw) {
+  let s = String(raw == null ? '' : raw).replace(/[^\d.,]/g, '');
+  if (!/\d/.test(s)) return NaN;
+  const dots = (s.match(/\./g) || []).length, commas = (s.match(/,/g) || []).length;
+  if (dots && commas) {
+    const dec = s.lastIndexOf('.') > s.lastIndexOf(',') ? '.' : ',';
+    const thou = dec === '.' ? ',' : '.';
+    s = s.split(thou).join('').replace(dec, '.');
+  } else if (commas) {
+    s = commas > 1 ? s.replace(/,/g, '') : s.replace(',', '.');
+  } else if (dots) {
+    if (dots > 1) s = s.replace(/\./g, '');
+    else {
+      const p = s.split('.');
+      if (p[1].length === 3 && p[0].length >= 1 && p[0].length <= 3 && Number(p[0]) !== 0) s = p[0] + p[1];
+    }
+  }
+  const n = parseFloat(s);
+  return isFinite(n) ? n : NaN;
+}
+
+// Terima YYYY-MM-DD, YYYY/MM/DD, DD/MM/YYYY, DD-MM-YYYY (hari duluan)
+function parseDateStr(s) {
+  s = String(s).trim();
+  let y, m, d, x;
+  if ((x = s.match(/^(\d{4})[-\/.](\d{1,2})[-\/.](\d{1,2})$/))) { y = +x[1]; m = +x[2]; d = +x[3]; }
+  else if ((x = s.match(/^(\d{1,2})[-\/.](\d{1,2})[-\/.](\d{4})$/))) { d = +x[1]; m = +x[2]; y = +x[3]; }
+  else return null;
+  const dt = new Date(Date.UTC(y, m - 1, d));
+  if (dt.getUTCFullYear() !== y || dt.getUTCMonth() !== m - 1 || dt.getUTCDate() !== d) return null;
+  return y + '-' + String(m).padStart(2, '0') + '-' + String(d).padStart(2, '0');
+}
+
+function parseType(s) {
+  s = String(s).trim().toLowerCase();
+  if (s === 'buy' || s === 'beli' || s === 'b') return 'buy';
+  if (s === 'sell' || s === 'jual' || s === 's') return 'sell';
+  return null;
+}
+
+function splitLine(line) {
+  if (line.indexOf('\t') >= 0) return line.split('\t');
+  if (line.indexOf(';') >= 0) return line.split(';');
+  if (line.indexOf('|') >= 0) return line.split('|');
+  return line.split(',');
+}
+
 async function onAddBatch(e) {
   e.preventDefault();
   const errBox = $('batchError');
@@ -978,21 +1069,30 @@ async function onAddBatch(e) {
   const raw = $('batchInput').value.trim();
   if (!raw) { errBox.textContent = 'Masukkan minimal satu transaksi.'; return; }
 
+  const f = fx();
   const items = [], errors = [];
   raw.split(/\r?\n/).forEach((line, idx) => {
     line = line.trim();
-    if (!line) return;
-    if (/^date\s*,/i.test(line)) return;     // lewati header
+    if (!line || /^(date|tanggal)\b/i.test(line)) return;
     const n = idx + 1;
-    const p = line.split(',').map(s => s.trim());
-    if (p.length !== 5) { errors.push('Baris ' + n + ': format salah. Harus: date,coin,type,harga,modal'); return; }
-    const date = p[0], coin = p[1].toUpperCase(), type = p[2].toLowerCase(), price = parseFloat(p[3]), modal = parseFloat(p[4]);
-    if (!/^\d{4}-\d{2}-\d{2}$/.test(date)) { errors.push('Baris ' + n + ': tanggal harus YYYY-MM-DD'); return; }
-    if (type !== 'buy' && type !== 'sell') { errors.push('Baris ' + n + ": type harus 'buy' atau 'sell'"); return; }
-    if (!isFinite(price) || price <= 0) { errors.push('Baris ' + n + ': harga harus angka > 0'); return; }
-    if (!isFinite(modal) || modal <= 0) { errors.push('Baris ' + n + ': modal harus angka > 0'); return; }
-    if (!coinBySymbol(coin)) { errors.push('Baris ' + n + ': koin "' + coin + '" tidak dikenal'); return; }
-    items.push({ date: date, coin: coin, type: type, price: price, modalBeli: modal });
+    const p = splitLine(line).map(s => s.trim());
+    while (p.length > 5 && p[p.length - 1] === '') p.pop();
+    if (p.length !== 5) {
+      errors.push('Baris ' + n + ': terbaca ' + p.length + ' kolom, seharusnya 5 (date, coin, type, harga, modal).' +
+        (p.length > 5 ? '\n   Jika angka memakai koma (mis. 62.534,5), pisahkan kolom dengan titik koma (;) atau tab.\n   Contoh: 2026-11-19;BTC;BUY;62.534,5;39' : ''));
+      return;
+    }
+    const date = parseDateStr(p[0]);
+    let coin = p[1].toUpperCase().replace(/[^A-Z0-9]/g, '');
+    coin = COIN_ALIASES[coin] || coin;
+    const type = parseType(p[2]);
+    const price = parseNum(p[3]), modal = parseNum(p[4]);
+    if (!date) { errors.push('Baris ' + n + ': tanggal "' + p[0] + '" tidak valid (pakai YYYY-MM-DD atau DD/MM/YYYY)'); return; }
+    if (!coinBySymbol(coin)) { errors.push('Baris ' + n + ': koin "' + p[1] + '" tidak dikenal'); return; }
+    if (!type) { errors.push('Baris ' + n + ': type "' + p[2] + '" harus buy/sell (atau beli/jual)'); return; }
+    if (!isFinite(price) || price <= 0) { errors.push('Baris ' + n + ': harga "' + p[3] + '" tidak terbaca'); return; }
+    if (!isFinite(modal) || modal <= 0) { errors.push('Baris ' + n + ': modal "' + p[4] + '" tidak terbaca'); return; }
+    items.push({ date: date, coin: coin, type: type, price: price / f, modalBeli: modal / f });
   });
   if (errors.length) { errBox.textContent = errors.slice(0, 15).join('\n') + (errors.length > 15 ? '\n...dan ' + (errors.length - 15) + ' error lain' : ''); return; }
   if (!items.length) { errBox.textContent = 'Tidak ada transaksi valid.'; return; }
@@ -1107,10 +1207,18 @@ function init() {
   }));
 
   // Tracker
-  $('currencySelector').addEventListener('change', function () {
-    S.currency = this.value;
+  $('currencySelector').addEventListener('change', async function () {
+    const prev = S.currency, next = this.value;
+    if (next !== 'IDR') {
+      const ok = await ensureRates();
+      if (!ok || !(S.fx.rates[next])) { this.value = prev; toast('Kurs ' + next + ' gagal dimuat, coba lagi.', 'error'); return; }
+    }
+    S.currency = next;
     S.tracker = {}; S.prevTracker = {}; S.changes = {};
+    syncCurrencyLabels();
     updatePriceDisplay();
+    updateTransactionTable();
+    updateDashboard();
     updatePrices();
   });
   $('priceCoinSelector').addEventListener('change', function () {
