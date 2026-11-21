@@ -168,6 +168,64 @@ body.light-theme tfoot tr{background:rgba(224,224,224,.5)}
 .modal{background:var(--card-bg);border:1px solid var(--card-border);border-radius:var(--radius);padding:25px;width:760px;max-width:100%;max-height:85vh;overflow:auto;box-shadow:var(--shadow)}
 .modal-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;gap:10px}
 .modal-header h3{font-size:20px}
+.mk-toolbar{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:18px}
+.mk-search{position:relative}
+.mk-symbol-btn{min-width:170px;font-family:'Roboto',sans-serif;letter-spacing:.5px}
+.mk-dropdown{position:absolute;top:calc(100% + 8px);left:0;width:400px;max-width:90vw;background:var(--card-bg);border:1px solid var(--card-border);border-radius:14px;box-shadow:var(--shadow);padding:12px;z-index:500}
+.mk-list{max-height:420px;overflow-y:auto;margin-top:10px}
+.mk-row{display:flex;justify-content:space-between;align-items:center;padding:10px 12px;border-radius:8px;cursor:pointer;font-family:'Roboto',sans-serif;font-size:14px;gap:10px}
+.mk-row:hover,.mk-row.sel{background:rgba(67,97,238,.15)}
+.mk-row small{color:var(--text-secondary);margin-left:4px}
+.mk-row .px{margin-left:auto;font-weight:600}
+.mk-row .ch{min-width:72px;text-align:right;font-weight:600}
+.mk-seg{display:inline-flex;background:var(--card-bg);border:1px solid var(--card-border);border-radius:10px;overflow:hidden}
+.mk-seg button{padding:10px 16px;border:none;background:transparent;color:var(--text-secondary);font-family:inherit;font-weight:600;cursor:pointer}
+.mk-seg button.active{background:var(--primary);color:#fff}
+.mk-quick{display:flex;gap:8px;flex-wrap:wrap}
+.mk-chip{padding:8px 14px;border-radius:50px;border:1px solid var(--card-border);background:var(--card-bg);color:var(--text-primary);cursor:pointer;font-family:inherit;font-size:13px;font-weight:600}
+.mk-chip:hover,.mk-chip.active{background:var(--primary);color:#fff;border-color:var(--primary)}
+.mk-live{margin-left:auto;font-size:13px;color:var(--text-secondary);display:flex;align-items:center;gap:8px}
+.mk-live i{width:9px;height:9px;border-radius:50%;background:var(--warning);display:inline-block}
+.mk-live.ok i{background:#22c55e;box-shadow:0 0 8px #22c55e}
+.mk-layout{display:grid;grid-template-columns:minmax(0,1fr) 380px;gap:20px;align-items:start}
+.tv-box{border-radius:var(--radius);overflow:hidden;border:1px solid var(--card-border);background:var(--card-bg)}
+.mk-main .tv-box{height:780px}
+.mk-side{display:flex;flex-direction:column;gap:16px;min-width:0}
+.mk-card{background:var(--card-bg);border:1px solid var(--card-border);border-radius:var(--radius);padding:18px}
+.mk-card h4{font-size:16px;margin-bottom:12px}
+.mk-head{display:flex;gap:12px;align-items:center}
+.mk-logo .coin-logo{width:40px;height:40px}
+.mk-title{font-size:20px;font-weight:700;font-family:'Roboto',sans-serif}
+.mk-desc{font-size:12px;color:var(--text-secondary);margin-top:2px}
+.mk-price{font-size:38px;font-weight:700;font-family:'Roboto',sans-serif;line-height:1.1;margin-top:12px}
+.mk-price small{font-size:14px;color:var(--text-secondary);margin-left:6px;font-weight:500}
+.mk-chg{font-size:17px;font-weight:600;margin-top:6px}
+.mk-meta{display:flex;justify-content:space-between;font-size:12px;color:var(--text-secondary);margin-top:10px;gap:10px;flex-wrap:wrap}
+@keyframes flashUp{from{color:#22c55e}to{color:inherit}}
+@keyframes flashDown{from{color:#f7525f}to{color:inherit}}
+.flash-up{animation:flashUp .6s}.flash-down{animation:flashDown .6s}
+.mk-vol{display:flex;justify-content:space-between;font-size:13px;color:var(--text-secondary)}
+.mk-vol b{display:block;color:var(--text-primary);font-size:20px;font-family:'Roboto',sans-serif;margin-top:2px}
+.mk-bar{display:flex;height:6px;border-radius:6px;overflow:hidden;margin-top:12px;background:var(--soft)}
+.mk-bar span:first-child{background:#3b82f6}.mk-bar span:last-child{background:#2fc4c4}
+.mk-perf{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.mk-perf div{border-radius:10px;padding:10px 6px;text-align:center;font-weight:700;font-size:15px;font-family:'Roboto',sans-serif;background:var(--soft);color:var(--text-secondary)}
+.mk-perf div small{display:block;font-size:11px;font-weight:600;margin-top:2px;opacity:.85}
+.mk-perf .up{background:rgba(34,171,148,.16);color:#22ab94}.mk-perf .dn{background:rgba(247,82,95,.16);color:#f7525f}
+.mk-season{height:170px;position:relative}
+.mk-legend{display:flex;gap:14px;justify-content:center;margin-top:10px;font-size:12px;color:var(--text-secondary)}
+.mk-legend i{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:5px}
+.mk-tech{height:430px}.mk-news{height:520px}
+.mk-note{font-size:12px;color:var(--warning);margin-top:8px}
+@media(max-width:1100px){.mk-layout{grid-template-columns:1fr}.mk-main .tv-box{height:560px}.mk-live{margin-left:0}}
+.rb-btn{padding:8px 15px;background:var(--soft);border:none;border-radius:8px;color:var(--text-secondary);font-family:inherit;cursor:pointer;transition:var(--transition)}
+.rb-btn.active{background:var(--primary);color:#fff}
+.rb-row{display:flex;align-items:center;gap:12px;padding:9px 12px;border-radius:10px;font-size:14px;margin-bottom:4px}
+.rb-row.active{background:var(--soft);outline:2px solid var(--primary)}
+.rb-row i{width:16px;height:16px;border-radius:4px;flex:none}
+.rb-row .nm{font-weight:600}
+.rb-row .rg{margin-left:auto;font-family:'Roboto',sans-serif;font-weight:600;text-align:right}
+.rb-info{font-size:12px;color:var(--text-secondary);margin-top:14px;line-height:1.7}
 @media(max-width:992px){.tabs{flex-direction:column;border-radius:var(--radius)}.form-row{flex-direction:column}}
 @media(max-width:768px){.price-content{flex-direction:column;align-items:stretch}.dashboard-price-display{width:100%;justify-content:center}}
 </style>
@@ -218,6 +276,8 @@ body.light-theme tfoot tr{background:rgba(224,224,224,.5)}
     <div class="tabs">
       <div class="tab active" data-tab="transactions"><i class="fas fa-exchange-alt"></i> Transactions</div>
       <div class="tab" data-tab="dashboard"><i class="fas fa-chart-line"></i> Dashboard</div>
+      <div class="tab" data-tab="market"><i class="fas fa-chart-area"></i> Chart</div>
+      <div class="tab" data-tab="rainbow"><i class="fas fa-rainbow"></i> Rainbow</div>
       <div class="tab hidden" id="adminTab" data-tab="admin"><i class="fas fa-user-shield"></i> Admin</div>
     </div>
 
@@ -293,7 +353,7 @@ body.light-theme tfoot tr{background:rgba(224,224,224,.5)}
       </div>
 
       <div class="form-section">
-        <div class="warning"><i class="fas fa-exclamation-circle"></i> Harga realtime diambil dari CoinGecko, otomatis pindah ke Binance jika gagal. Transaksi tersimpan di Server  dan otomatis dikonversi ke mata uang yang dipilih di Price Tracker, termasuk saat mengisi form.</div>
+        <div class="warning"><i class="fas fa-exclamation-circle"></i> Harga realtime diambil dari CoinGecko, otomatis pindah ke Binance jika gagal. Transaksi tersimpan di Google Sheets (dalam IDR) dan otomatis dikonversi ke mata uang yang dipilih di Price Tracker, termasuk saat mengisi form.</div>
       </div>
     </div>
 
@@ -335,6 +395,80 @@ body.light-theme tfoot tr{background:rgba(224,224,224,.5)}
           <thead><tr><th>Date</th><th>Coin</th><th>Type</th><th>Price</th><th>Amount</th><th>Value</th></tr></thead>
           <tbody></tbody>
         </table>
+      </div>
+    </div>
+
+    <!-- Chart TradingView (Binance) -->
+    <div id="market" class="tab-content">
+      <div class="mk-toolbar">
+        <div class="mk-search">
+          <button class="btn mk-symbol-btn" id="mkSymbolBtn"><i class="fas fa-search"></i> <span id="mkSymbolLabel">BTCUSDT</span></button>
+          <div id="mkDropdown" class="mk-dropdown hidden">
+            <input id="mkSearchInput" class="form-control" placeholder="Cari coin… (mis. SOL, PEPE, DOGE)" autocomplete="off">
+            <div id="mkList" class="mk-list"></div>
+          </div>
+        </div>
+        <div class="mk-seg" id="mkMarketSeg"><button data-market="spot" class="active">Spot</button><button data-market="perp">Perpetual</button></div>
+        <div class="mk-quick" id="mkQuick"></div>
+        <span class="mk-live" id="mkLive"><i></i><span id="mkLiveText">Menyambung…</span></span>
+      </div>
+      <div class="mk-layout">
+        <div class="mk-main"><div id="tvChartBox" class="tv-box"></div></div>
+        <aside class="mk-side">
+          <div class="mk-card">
+            <div class="mk-head">
+              <div class="mk-logo" id="mkLogo"></div>
+              <div><div class="mk-title" id="mkTitle">BTCUSDT</div><div class="mk-desc" id="mkDesc">-</div><div class="mk-desc" id="mkType">-</div></div>
+            </div>
+            <div class="mk-price"><span id="mkPrice">-</span><small>USDT</small></div>
+            <div class="mk-chg" id="mkChg">-</div>
+            <div class="mk-meta"><span>24j Low: <b id="mkLow">-</b></span><span>24j High: <b id="mkHigh">-</b></span></div>
+            <div class="mk-note hidden" id="mkNote"></div>
+          </div>
+          <div class="mk-card">
+            <h4>Volume</h4>
+            <div class="mk-vol"><div>Volume (24j)<b id="mkVol">-</b></div><div style="text-align:right">Avg volume (30D)<b id="mkAvgVol">-</b></div></div>
+            <div class="mk-bar"><span id="mkVolBar1" style="width:50%"></span><span id="mkVolBar2" style="width:50%"></span></div>
+          </div>
+          <div class="mk-card"><h4>Performance</h4><div class="mk-perf" id="mkPerf"></div></div>
+          <div class="mk-card">
+            <h4>Seasonals</h4>
+            <div class="mk-season"><canvas id="mkSeasonCanvas"></canvas></div>
+            <div class="mk-legend" id="mkSeasonLegend"></div>
+          </div>
+          <div class="mk-card"><h4>Technicals</h4><div class="tv-box mk-tech" id="tvTechBox"></div></div>
+          <div class="mk-card"><h4>News</h4><div class="tv-box mk-news" id="tvNewsBox"></div></div>
+        </aside>
+      </div>
+    </div>
+
+    <!-- Bitcoin Rainbow Chart -->
+    <div id="rainbow" class="tab-content">
+      <div class="dashboard-header">
+        <h1><i class="fas fa-rainbow"></i> Bitcoin Rainbow Chart</h1>
+        <div class="chart-actions">
+          <button class="rb-btn active" data-rbscale="log">Log</button>
+          <button class="rb-btn" data-rbscale="linear">Linear</button>
+          <button class="rb-btn" id="rbRefresh" title="Muat ulang data historis"><i class="fas fa-sync-alt"></i></button>
+        </div>
+      </div>
+      <div class="cards-container">
+        <div class="card"><h3><i class="fab fa-bitcoin"></i> Harga BTC (USD)</h3><div id="rbPrice" class="card-value">-</div><p class="card-description" id="rbLive">Menyambung…</p></div>
+        <div class="card"><h3><i class="fas fa-layer-group"></i> Band Saat Ini</h3><div id="rbBand" class="card-value" style="font-size:22px">-</div><p class="card-description" id="rbBandId">-</p></div>
+        <div class="card"><h3><i class="fas fa-bullseye"></i> Nilai Model (tengah)</h3><div id="rbModel" class="card-value">-</div><p class="card-description">Garis regresi logaritmik</p></div>
+        <div class="card"><h3><i class="fas fa-percentage"></i> Posisi vs Model</h3><div id="rbDiff" class="card-value">-</div><p class="card-description" id="rbDays">-</p></div>
+      </div>
+      <div class="chart-container" style="height:620px">
+        <div class="chart-header"><h2><i class="fas fa-chart-area"></i> Rainbow Chart</h2></div>
+        <div class="chart-box">
+          <canvas id="rbChart"></canvas>
+          <div id="rbPlaceholder" class="chart-placeholder"><h3>Memuat data historis...</h3></div>
+        </div>
+      </div>
+      <div class="form-section">
+        <h3><i class="fas fa-palette"></i> Rentang Harga Tiap Band (hari ini)</h3>
+        <div id="rbLegend"></div>
+        <div class="rb-info" id="rbInfo"></div>
       </div>
     </div>
 
@@ -619,6 +753,8 @@ function forceLogout(message) {
   S.transactions = []; S.prices = {}; S.prevPrices = {}; S.tracker = {}; S.prevTracker = {}; S.changes = {};
   S.selectedCoin = '';
   if (S.chart) { S.chart.destroy(); S.chart = null; }
+  marketStop();
+  rainbowStop();
   ADMIN.users = [];
   closeModal();
   $('adminTab').classList.add('hidden');
@@ -1216,13 +1352,780 @@ async function onDeleteRow(e) {
   } catch (err) { btn.disabled = false; reportError(err); }
 }
 
+/* ======================= SOCKET REALTIME (Binance) ======================= */
+function createTickerSocket(getUrl, onMsg, onStatus) {
+  let ws = null, closed = false, retry = 0, timer = null;
+  function schedule() {
+    if (closed) return;
+    clearTimeout(timer);
+    timer = setTimeout(connect, Math.min(1000 * Math.pow(2, retry++), 15000));
+  }
+  function connect() {
+    if (closed) return;
+    try { ws = new WebSocket(getUrl()); } catch (e) { onStatus(false); schedule(); return; }
+    ws.onopen = () => { retry = 0; onStatus(true); };
+    ws.onmessage = ev => { try { onMsg(JSON.parse(ev.data)); } catch (e) { /* abaikan */ } };
+    ws.onclose = () => { onStatus(false); schedule(); };
+    ws.onerror = () => { try { ws.close(); } catch (e) { /* abaikan */ } };
+  }
+  connect();
+  return {
+    close() {
+      closed = true;
+      clearTimeout(timer);
+      if (ws) {
+        ws.onopen = ws.onclose = ws.onerror = ws.onmessage = null;
+        try { ws.close(); } catch (e) { /* abaikan */ }
+      }
+    }
+  };
+}
+
+const DAY = 86400000;
+const BN = {
+  spot: ['https://api.binance.com/api/v3', 'https://data-api.binance.vision/api/v3'],
+  perp: ['https://fapi.binance.com/fapi/v1']
+};
+// Perpetual dicoba dulu; bila jaringan memblokir fapi, data jatuh ke spot (market yang dipakai dikembalikan)
+async function bnGetAny(market, path, params) {
+  const qs = new URLSearchParams(params || {}).toString();
+  const order = market === 'perp' ? ['perp', 'spot'] : ['spot'];
+  let lastErr = new Error('gagal');
+  for (const m of order) {
+    for (const base of BN[m]) {
+      try { return { data: await fetchJSON(base + path + (qs ? '?' + qs : ''), 15000), market: m }; }
+      catch (e) { lastErr = e; }
+    }
+  }
+  throw lastErr;
+}
+
+function fmtPx(p) {
+  p = Number(p);
+  if (!isFinite(p)) return '-';
+  const a = Math.abs(p);
+  const d = a >= 1000 ? 2 : a >= 10 ? 3 : a >= 1 ? 4 : a >= 0.1 ? 5 : a >= 0.01 ? 6 : 8;
+  return p.toLocaleString('en-US', { minimumFractionDigits: Math.min(2, d), maximumFractionDigits: d });
+}
+function fmtVol(v) {
+  v = Number(v);
+  if (!isFinite(v)) return '-';
+  const a = Math.abs(v);
+  if (a >= 1e9) return (v / 1e9).toFixed(2) + 'B';
+  if (a >= 1e6) return (v / 1e6).toFixed(2) + 'M';
+  if (a >= 1e3) return (v / 1e3).toFixed(2) + 'K';
+  return v.toFixed(2);
+}
+function fmtUsd(v) {
+  return '$' + Number(v).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+}
+function chartColors() {
+  const light = document.body.classList.contains('light-theme');
+  return { light: light, txt: light ? '#2a2b36' : '#e0e0e0', grid: light ? 'rgba(0,0,0,.08)' : 'rgba(255,255,255,.08)' };
+}
+
+/* ======================= CHART TRADINGVIEW + DETAIL ======================= */
+const M = {
+  inited: false, active: false, market: 'spot', symbol: 'BTCUSDT', token: 0,
+  list: [], listFor: '', listTs: 0,
+  ticker: null, ws: null, wsOk: false, poll: null, renderTimer: null,
+  daily: null, dailyCache: {}, dataMarket: 'spot', tvKey: '', seasonChart: null, lastPx: null, logoFor: ''
+};
+const QUICK = ['BTC', 'ETH', 'SOL', 'BNB', 'XRP', 'DOGE'];
+const MONTHS_ID = ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Agu', 'Sep', 'Okt', 'Nov', 'Des'];
+const MONTH_START_DOY = [0, 31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334];
+
+function tvSymbol() { return 'BINANCE:' + M.symbol + (M.market === 'perp' ? '.P' : ''); }
+
+function tvEmbed(box, script, cfg) {
+  box.innerHTML = '';
+  const wrap = document.createElement('div');
+  wrap.className = 'tradingview-widget-container';
+  wrap.style.cssText = 'height:100%;width:100%';
+  const inner = document.createElement('div');
+  inner.className = 'tradingview-widget-container__widget';
+  inner.style.cssText = 'height:100%;width:100%';
+  wrap.appendChild(inner);
+  const s = document.createElement('script');
+  s.type = 'text/javascript';
+  s.async = true;
+  s.src = 'https://s3.tradingview.com/external-embedding/' + script + '.js';
+  s.text = JSON.stringify(cfg);
+  wrap.appendChild(s);
+  box.appendChild(wrap);
+}
+
+function mountTV() {
+  const light = document.body.classList.contains('light-theme');
+  const key = tvSymbol() + '|' + (light ? 'l' : 'd');
+  if (M.tvKey === key) return;
+  M.tvKey = key;
+  const theme = light ? 'light' : 'dark', sym = tvSymbol();
+  tvEmbed($('tvChartBox'), 'embed-widget-advanced-chart', {
+    autosize: true, symbol: sym, interval: 'D', timezone: 'Asia/Jakarta', theme: theme, style: '1', locale: 'id',
+    allow_symbol_change: false, save_image: true, calendar: false, support_host: 'https://www.tradingview.com'
+  });
+  tvEmbed($('tvTechBox'), 'embed-widget-technical-analysis', {
+    interval: '1D', width: '100%', height: '100%', isTransparent: true, symbol: sym,
+    showIntervalTabs: true, displayMode: 'single', locale: 'id', colorTheme: theme
+  });
+  tvEmbed($('tvNewsBox'), 'embed-widget-timeline', {
+    feedMode: 'symbol', symbol: sym, isTransparent: true, displayMode: 'regular',
+    width: '100%', height: '100%', colorTheme: theme, locale: 'id'
+  });
+}
+
+/* ---- daftar & pencarian simbol ---- */
+async function loadSymbolList() {
+  if (M.listFor === M.market && Date.now() - M.listTs < 60000 && M.list.length) return;
+  const r = await bnGetAny(M.market, '/ticker/24hr', M.market === 'spot' ? { type: 'MINI' } : {});
+  if (r.market !== M.market) throw new Error('Binance Futures tidak dapat diakses dari jaringan ini');
+  if (!Array.isArray(r.data)) throw new Error('Daftar koin tidak valid');
+  M.list = r.data
+    .filter(x => /USDT$/.test(x.symbol) && x.symbol.indexOf('_') < 0 && Number(x.quoteVolume) > 0)
+    .map(x => {
+      const last = Number(x.lastPrice), open = Number(x.openPrice);
+      const ch = x.priceChangePercent !== undefined ? Number(x.priceChangePercent) : (open > 0 ? (last / open - 1) * 100 : 0);
+      return { symbol: x.symbol, base: x.symbol.slice(0, -4), price: last, change: ch, qv: Number(x.quoteVolume) };
+    })
+    .sort((a, b) => b.qv - a.qv);
+  M.listFor = M.market;
+  M.listTs = Date.now();
+}
+
+function renderSymbolList() {
+  const box = $('mkList');
+  box.innerHTML = '';
+  const q = $('mkSearchInput').value.trim().toUpperCase().replace(/USDT$/, '');
+  let items = M.list;
+  if (q) {
+    const starts = [], contains = [];
+    M.list.forEach(x => { if (x.base.indexOf(q) === 0) starts.push(x); else if (x.base.indexOf(q) > 0) contains.push(x); });
+    items = starts.concat(contains);
+  }
+  items = items.slice(0, 80);
+  if (!items.length) { const p = document.createElement('div'); p.className = 'loading-text'; p.textContent = 'Koin tidak ditemukan'; box.appendChild(p); return; }
+  items.forEach((x, i) => {
+    const row = document.createElement('div');
+    row.className = 'mk-row' + (i === 0 && q ? ' sel' : '');
+    row.dataset.symbol = x.symbol;
+    const l = document.createElement('span');
+    const b = document.createElement('b'); b.textContent = x.base;
+    const s = document.createElement('small'); s.textContent = '/USDT';
+    l.appendChild(b); l.appendChild(s);
+    const px = document.createElement('span'); px.className = 'px'; px.textContent = fmtPx(x.price);
+    const ch = document.createElement('span'); ch.className = 'ch ' + (x.change >= 0 ? 'positive' : 'negative');
+    ch.textContent = (x.change >= 0 ? '+' : '') + x.change.toFixed(2) + '%';
+    row.appendChild(l); row.appendChild(px); row.appendChild(ch);
+    row.addEventListener('click', () => marketSelect(x.symbol, M.market));
+    box.appendChild(row);
+  });
+}
+
+async function openDropdown() {
+  $('mkDropdown').classList.remove('hidden');
+  const inp = $('mkSearchInput');
+  inp.value = '';
+  inp.focus();
+  const box = $('mkList');
+  if (!M.list.length || M.listFor !== M.market) box.innerHTML = '<div class="loading-text"><span class="spinner"></span> Memuat daftar koin...</div>';
+  else renderSymbolList();
+  try { await loadSymbolList(); if (!$('mkDropdown').classList.contains('hidden')) renderSymbolList(); }
+  catch (e) { box.innerHTML = ''; const p = document.createElement('div'); p.className = 'loading-text'; p.textContent = 'Gagal memuat daftar: ' + e.message; box.appendChild(p); }
+}
+function closeDropdown() { $('mkDropdown').classList.add('hidden'); }
+
+function buildQuick() {
+  const box = $('mkQuick');
+  box.innerHTML = '';
+  QUICK.forEach(c => {
+    const b = document.createElement('button');
+    b.className = 'mk-chip';
+    b.textContent = c;
+    b.dataset.symbol = c + 'USDT';
+    b.addEventListener('click', () => marketSelect(c + 'USDT', M.market));
+    box.appendChild(b);
+  });
+}
+
+async function onMarketToggle(m) {
+  if (m === M.market) return;
+  const prev = M.market;
+  M.market = m;
+  M.listFor = '';
+  try {
+    await loadSymbolList();
+  } catch (e) {
+    M.market = prev; M.listFor = '';
+    toast(e.message, 'error');
+    return;
+  }
+  let sym = M.symbol;
+  if (!M.list.some(x => x.symbol === sym)) { sym = 'BTCUSDT'; toast(M.symbol + ' tidak tersedia di ' + (m === 'perp' ? 'Perpetual' : 'Spot') + ', pindah ke BTCUSDT', 'info'); }
+  marketSelect(sym, m);
+}
+
+function marketSelect(symbol, market) {
+  M.symbol = symbol;
+  if (market) M.market = market;
+  try { localStorage.setItem('porto_market_sel', JSON.stringify({ s: M.symbol, m: M.market })); } catch (e) { /* abaikan */ }
+  $('mkSymbolLabel').textContent = M.symbol + (M.market === 'perp' ? '.P' : '');
+  document.querySelectorAll('#mkMarketSeg button').forEach(b => b.classList.toggle('active', b.dataset.market === M.market));
+  document.querySelectorAll('#mkQuick .mk-chip').forEach(b => b.classList.toggle('active', b.dataset.symbol === M.symbol));
+  closeDropdown();
+  marketLoad();
+}
+
+/* ---- siklus hidup ---- */
+function marketEnter() {
+  M.active = true;
+  if (!M.inited) {
+    M.inited = true;
+    try {
+      const s = JSON.parse(localStorage.getItem('porto_market_sel') || 'null');
+      if (s && /^[A-Z0-9]{2,20}$/.test(s.s)) { M.symbol = s.s; M.market = s.m === 'perp' ? 'perp' : 'spot'; }
+    } catch (e) { /* abaikan */ }
+    buildQuick();
+    marketSelect(M.symbol, M.market);
+  } else {
+    marketLoad();
+  }
+}
+
+function marketStopStreams() {
+  if (M.ws) { M.ws.close(); M.ws = null; }
+  if (M.poll) { clearInterval(M.poll); M.poll = null; }
+  if (M.renderTimer) { clearTimeout(M.renderTimer); M.renderTimer = null; }
+  M.wsOk = false;
+}
+function marketStop() {
+  M.active = false;
+  M.token++;
+  marketStopStreams();
+  if (M.seasonChart) { M.seasonChart.destroy(); M.seasonChart = null; }
+}
+
+function marketLoad() {
+  marketStopStreams();
+  M.token++;
+  M.ticker = null; M.daily = null; M.lastPx = null;
+  $('mkNote').classList.add('hidden');
+  renderHeader(); renderVolume(); renderPerf(); renderLive();
+  mountTV();
+  fetchTickerREST();
+  loadDaily();
+  openTickerWS();
+  M.poll = setInterval(() => { if (M.active && !M.wsOk) fetchTickerREST(); }, 4000);
+}
+
+async function fetchTickerREST() {
+  const token = M.token;
+  try {
+    const r = await bnGetAny(M.market, '/ticker/24hr', { symbol: M.symbol });
+    if (token !== M.token) return;
+    M.dataMarket = r.market;
+    const d = r.data;
+    M.ticker = { c: +d.lastPrice, o: +d.openPrice, h: +d.highPrice, l: +d.lowPrice, v: +d.volume, q: +d.quoteVolume };
+    scheduleRender();
+  } catch (e) {
+    if (token === M.token && !M.ticker) $('mkPrice').textContent = 'n/a';
+  }
+}
+
+function openTickerWS() {
+  const token = M.token, sym = M.symbol.toLowerCase();
+  const host = M.market === 'perp' ? 'wss://fstream.binance.com/ws/' : 'wss://stream.binance.com:9443/ws/';
+  M.ws = createTickerSocket(() => host + sym + '@ticker', m => {
+    if (token !== M.token || !m || m.c === undefined) return;
+    M.ticker = { c: +m.c, o: +m.o, h: +m.h, l: +m.l, v: +m.v, q: +m.q };
+    scheduleRender();
+  }, ok => { if (token === M.token) { M.wsOk = ok; renderLive(); } });
+}
+
+function scheduleRender() {
+  if (M.renderTimer) return;
+  M.renderTimer = setTimeout(() => {
+    M.renderTimer = null;
+    if (!M.active) return;
+    renderHeader(); renderVolume(); renderPerf();
+  }, 400);
+}
+
+/* ---- rendering panel detail ---- */
+function renderLive() {
+  const el = $('mkLive');
+  el.className = 'mk-live' + (M.wsOk ? ' ok' : '');
+  $('mkLiveText').textContent = M.wsOk ? 'Realtime (WebSocket)' : 'Menyambung… / polling';
+}
+
+function renderHeader() {
+  const base = M.symbol.replace(/USDT$/, '');
+  const coin = coinBySymbol(base);
+  $('mkTitle').textContent = M.symbol + (M.market === 'perp' ? '.P' : '');
+  $('mkDesc').textContent = (coin ? coin.name : base) + ' / TetherUS' + (M.market === 'perp' ? ' PERPETUAL CONTRACT' : '') + ' · BINANCE';
+  $('mkType').textContent = (M.market === 'perp' ? 'Swap' : 'Spot') + ' · Crypto';
+  if (M.logoFor !== M.symbol) {
+    M.logoFor = M.symbol;
+    const box = $('mkLogo');
+    box.innerHTML = '';
+    box.appendChild(logoImg({ name: base, logo: coin && coin.logo ? coin.logo : 'https://s3-symbol-logo.tradingview.com/crypto/XTVC' + base + '.svg' }, base));
+  }
+  const t = M.ticker, pe = $('mkPrice'), ce = $('mkChg');
+  if (!t) { pe.textContent = '-'; ce.textContent = '-'; ce.className = 'mk-chg'; $('mkLow').textContent = '-'; $('mkHigh').textContent = '-'; return; }
+  pe.textContent = fmtPx(t.c);
+  if (M.lastPx !== null && t.c !== M.lastPx) {
+    pe.classList.remove('flash-up', 'flash-down');
+    void pe.offsetWidth;
+    pe.classList.add(t.c > M.lastPx ? 'flash-up' : 'flash-down');
+  }
+  M.lastPx = t.c;
+  const abs = t.c - t.o, pct = t.o > 0 ? (t.c / t.o - 1) * 100 : 0;
+  ce.textContent = (abs >= 0 ? '+' : '') + fmtPx(abs) + '  ' + (pct >= 0 ? '+' : '') + pct.toFixed(2) + '%';
+  ce.className = 'mk-chg ' + (pct >= 0 ? 'positive' : 'negative');
+  $('mkLow').textContent = fmtPx(t.l);
+  $('mkHigh').textContent = fmtPx(t.h);
+}
+
+function avgVol30() {
+  const d = M.daily;
+  if (!d || !d.length) return null;
+  const today = Math.floor(Date.now() / DAY) * DAY;
+  const done = d.filter(k => k.t < today).slice(-30);
+  if (!done.length) return null;
+  return done.reduce((s, k) => s + k.v, 0) / done.length;
+}
+
+function renderVolume() {
+  const t = M.ticker, avg = avgVol30();
+  $('mkVol').textContent = t ? fmtVol(t.v) : '-';
+  $('mkAvgVol').textContent = avg === null ? '-' : fmtVol(avg);
+  let w1 = 50;
+  if (t && avg !== null && t.v + avg > 0) w1 = Math.max(3, Math.min(97, t.v / (t.v + avg) * 100));
+  $('mkVolBar1').style.width = w1 + '%';
+  $('mkVolBar2').style.width = (100 - w1) + '%';
+}
+
+function lastCandleOnOrBefore(arr, ts) {
+  let lo = 0, hi = arr.length - 1, ans = -1;
+  while (lo <= hi) {
+    const mid = (lo + hi) >> 1;
+    if (arr[mid].t <= ts) { ans = mid; lo = mid + 1; } else hi = mid - 1;
+  }
+  return ans < 0 ? null : arr[ans];
+}
+
+function perfTargets(now) {
+  const d = new Date(now), y = d.getUTCFullYear(), m = d.getUTCMonth(), day = d.getUTCDate();
+  return [
+    ['1W', Date.UTC(y, m, day) - 7 * DAY], ['1M', Date.UTC(y, m - 1, day)], ['3M', Date.UTC(y, m - 3, day)],
+    ['6M', Date.UTC(y, m - 6, day)], ['YTD', Date.UTC(y - 1, 11, 31)], ['1Y', Date.UTC(y - 1, m, day)]
+  ];
+}
+
+function renderPerf() {
+  const box = $('mkPerf');
+  box.innerHTML = '';
+  const px = M.ticker ? M.ticker.c : null;
+  perfTargets(Date.now()).forEach(p => {
+    const cell = document.createElement('div');
+    const c = (M.daily && px !== null) ? lastCandleOnOrBefore(M.daily, p[1]) : null;
+    let txt = '—', cls = '';
+    if (c && c.c > 0) { const v = (px / c.c - 1) * 100; txt = (v >= 0 ? '+' : '') + v.toFixed(2) + '%'; cls = v >= 0 ? 'up' : 'dn'; }
+    cell.className = cls;
+    cell.appendChild(document.createTextNode(txt));
+    const sm = document.createElement('small'); sm.textContent = p[0];
+    cell.appendChild(sm);
+    box.appendChild(cell);
+  });
+}
+
+async function loadDaily() {
+  const token = M.token, key = M.market + ':' + M.symbol;
+  try {
+    const c = M.dailyCache[key];
+    if (c && Date.now() - c.ts < 300000) {
+      M.daily = c.data; M.dataMarket = c.used;
+    } else {
+      const yr = new Date().getUTCFullYear();
+      let from = Date.UTC(yr - 3, 11, 31), used = M.market;
+      const all = [];
+      for (let i = 0; i < 4; i++) {
+        const r = await bnGetAny(M.market, '/klines', { symbol: M.symbol, interval: '1d', limit: 1000, startTime: from });
+        used = r.market;
+        if (!Array.isArray(r.data) || !r.data.length) break;
+        r.data.forEach(k => all.push({ t: k[0], o: +k[1], c: +k[4], v: +k[5] }));
+        if (r.data.length < 1000) break;
+        from = r.data[r.data.length - 1][0] + DAY;
+      }
+      if (token !== M.token) return;
+      if (!all.length) throw new Error('data kosong');
+      M.daily = all; M.dataMarket = used;
+      M.dailyCache[key] = { ts: Date.now(), data: all, used: used };
+    }
+    if (token !== M.token) return;
+    const note = $('mkNote');
+    if (M.market === 'perp' && M.dataMarket !== 'perp') { note.textContent = 'Futures tidak dapat diakses: data panel memakai harga spot.'; note.classList.remove('hidden'); }
+    else note.classList.add('hidden');
+    renderVolume(); renderPerf(); renderSeasonals();
+  } catch (e) {
+    if (token === M.token) { M.daily = null; renderPerf(); $('mkSeasonLegend').textContent = 'Data historis tidak tersedia'; }
+  }
+}
+
+function renderSeasonals() {
+  if (!M.active || !M.daily) return;
+  if (M.seasonChart) { M.seasonChart.destroy(); M.seasonChart = null; }
+  if (typeof Chart === 'undefined') return;
+  const yr = new Date().getUTCFullYear(), col = {};
+  col[yr] = '#3b82f6'; col[yr - 1] = '#22c55e'; col[yr - 2] = '#f59e0b';
+  const datasets = [yr, yr - 1, yr - 2].map(Y => {
+    const data = new Array(366).fill(null);
+    const start = Date.UTC(Y, 0, 1), end = Date.UTC(Y + 1, 0, 1);
+    const b = lastCandleOnOrBefore(M.daily, start - DAY);
+    let base = b ? b.c : null;
+    M.daily.forEach(k => {
+      if (k.t >= start && k.t < end) {
+        if (base === null) base = k.o;
+        data[Math.floor((k.t - start) / DAY)] = (k.c / base - 1) * 100;
+      }
+    });
+    return { label: String(Y), data: data, borderColor: col[Y], borderWidth: 1.6, pointRadius: 0, tension: 0.2, spanGaps: false };
+  });
+  const cc = chartColors();
+  const lg = $('mkSeasonLegend');
+  lg.innerHTML = '';
+  [yr, yr - 1, yr - 2].forEach(Y => {
+    const s = document.createElement('span');
+    const i = document.createElement('i'); i.style.background = col[Y];
+    s.appendChild(i); s.appendChild(document.createTextNode(String(Y)));
+    lg.appendChild(s);
+  });
+  M.seasonChart = new Chart($('mkSeasonCanvas'), {
+    type: 'line',
+    data: { labels: Array.from({ length: 366 }, (_, i) => i + 1), datasets: datasets },
+    options: {
+      responsive: true, maintainAspectRatio: false, animation: false,
+      interaction: { mode: 'index', intersect: false },
+      scales: {
+        x: { ticks: { color: cc.txt, autoSkip: false, maxRotation: 0, font: { size: 10 }, callback: (v, i) => { const k = MONTH_START_DOY.indexOf(i); return k >= 0 ? MONTHS_ID[k] : ''; } }, grid: { display: false } },
+        y: { ticks: { color: cc.txt, callback: v => v + '%', font: { size: 10 } }, grid: { color: cc.grid } }
+      },
+      plugins: { legend: { display: false }, tooltip: { callbacks: { title: it => 'Hari ke-' + it[0].label, label: c => c.parsed.y === null ? '' : c.dataset.label + ': ' + c.parsed.y.toFixed(2) + '%' } } }
+    }
+  });
+}
+
+/* ======================= BITCOIN RAINBOW CHART ======================= */
+const GENESIS = Date.UTC(2009, 0, 9);   // acuan hari rumus rainbow chart
+const RB_HIST_KEY = 'porto_btc_hist_v1';
+const RB_BANDS = [
+  { name: 'Basically a Fire Sale', id: 'Obral besar', color: '#3b4cc0' },
+  { name: 'BUY!', id: 'Beli!', color: '#4a8ee8' },
+  { name: 'Accumulate', id: 'Akumulasi', color: '#2fc4c4' },
+  { name: 'Still cheap', id: 'Masih murah', color: '#4cc96a' },
+  { name: 'HODL!', id: 'Tahan (HODL)', color: '#b6dc4a' },
+  { name: 'Is this a bubble?', id: 'Gelembung?', color: '#ffd23f' },
+  { name: 'FOMO intensifies', id: 'FOMO meningkat', color: '#ff9f1c' },
+  { name: 'Sell. Seriously, SELL!', id: 'Jual!', color: '#ff5a36' },
+  { name: 'Maximum Bubble Territory', id: 'Zona gelembung maksimum', color: '#d7263d' }
+];
+const R = { hist: null, source: '', model: null, chart: null, active: false, token: 0, ws: null, wsOk: false, poll: null,
+  price: null, scale: 'log', pts: [], todayIdx: -1, statTimer: null, lastChartUpd: 0 };
+
+async function histCoinMetrics() {
+  let url = 'https://community-api.coinmetrics.io/v4/timeseries/asset-metrics?assets=btc&metrics=PriceUSD&frequency=1d&start_time=2010-07-18&page_size=10000';
+  const out = [];
+  for (let g = 0; url && g < 5; g++) {
+    const d = await fetchJSON(url, 25000);
+    (d.data || []).forEach(r => {
+      const p = parseFloat(r.PriceUSD);
+      if (p > 0 && r.time) out.push([Date.UTC(+r.time.slice(0, 4), +r.time.slice(5, 7) - 1, +r.time.slice(8, 10)), p]);
+    });
+    url = d.next_page_url || null;
+  }
+  return out;
+}
+async function histCryptoCompare() {
+  const out = [];
+  let toTs = Math.floor(Date.now() / 1000);
+  for (let i = 0; i < 4; i++) {
+    const d = await fetchJSON('https://min-api.cryptocompare.com/data/v2/histoday?fsym=BTC&tsym=USD&limit=2000&toTs=' + toTs, 25000);
+    const arr = d && d.Data && d.Data.Data;
+    if (!arr || !arr.length) break;
+    arr.forEach(r => { if (r.close > 0) out.push([r.time * 1000, r.close]); });
+    if (arr[0].time <= 1279411200) break;
+    toTs = arr[0].time - 86400;
+  }
+  return out;
+}
+async function histBinance() {
+  const out = [];
+  let from = Date.UTC(2017, 7, 17);
+  for (let i = 0; i < 3; i++) {
+    const r = await bnGetAny('spot', '/klines', { symbol: 'BTCUSDT', interval: '1d', limit: 1000, startTime: from });
+    if (!Array.isArray(r.data) || !r.data.length) break;
+    r.data.forEach(k => out.push([k[0], +k[4]]));
+    if (r.data.length < 1000) break;
+    from = r.data[r.data.length - 1][0] + DAY;
+  }
+  return out;
+}
+function cleanHist(arr) {
+  const m = new Map();
+  arr.forEach(([t, p]) => { if (p > 0 && isFinite(p)) m.set(Math.floor(t / DAY) * DAY, p); });
+  return [...m.entries()].sort((a, b) => a[0] - b[0]);
+}
+
+async function fetchBtcHistory() {
+  try {
+    const c = JSON.parse(localStorage.getItem(RB_HIST_KEY) || 'null');
+    if (c && Array.isArray(c.d) && c.d.length > 1000 && Date.now() - c.ts < 12 * 3600 * 1000) return { data: c.d, source: c.s };
+  } catch (e) { /* abaikan */ }
+  let data = null, source = '';
+  try { data = cleanHist(await histCoinMetrics()); source = 'Coin Metrics'; } catch (e) { console.warn('CoinMetrics:', e.message); }
+  if (!data || data.length < 1000) {
+    try { data = cleanHist(await histCryptoCompare()); source = 'CryptoCompare'; } catch (e) { console.warn('CryptoCompare:', e.message); }
+  }
+  if (!data || data.length < 300) { data = cleanHist(await histBinance()); source = 'Binance (sejak 2017)'; }
+  if (!data || data.length < 100) throw new Error('Data historis BTC tidak dapat dimuat');
+  try { localStorage.setItem(RB_HIST_KEY, JSON.stringify({ ts: Date.now(), s: source, d: data.map(x => [x[0], Math.round(x[1] * 10000) / 10000]) })); } catch (e) { /* kuota penuh: abaikan */ }
+  return { data: data, source: source };
+}
+
+// Regresi logaritmik: log10(harga) = a * ln(hari sejak 9 Jan 2009) + b; band = rentang residual dibagi 9
+function fitModel(hist) {
+  const xs = [], ys = [];
+  hist.forEach(([t, p]) => { const d = (t - GENESIS) / DAY; if (d > 1 && p > 0) { xs.push(Math.log(d)); ys.push(Math.log10(p)); } });
+  const n = xs.length;
+  let sx = 0, sy = 0, sxx = 0, sxy = 0;
+  for (let i = 0; i < n; i++) { sx += xs[i]; sy += ys[i]; sxx += xs[i] * xs[i]; sxy += xs[i] * ys[i]; }
+  const a = (n * sxy - sx * sy) / (n * sxx - sx * sx), b = (sy - a * sx) / n;
+  const mean = sy / n;
+  let ssr = 0, sst = 0;
+  const res = ys.map((y, i) => { const r = y - (a * xs[i] + b); ssr += r * r; sst += (y - mean) * (y - mean); return r; });
+  const sorted = res.slice().sort((p, q) => p - q);
+  const lo = sorted[Math.floor(n * 0.005)], hi = sorted[Math.min(n - 1, Math.ceil(n * 0.995) - 1)];
+  return { a: a, b: b, lo: lo, hi: hi, step: (hi - lo) / 9, r2: 1 - ssr / sst, n: n };
+}
+function rbCenter(m, t) { return Math.pow(10, m.a * Math.log((t - GENESIS) / DAY) + m.b); }
+function rbEdge(m, k, t) { return Math.pow(10, m.a * Math.log((t - GENESIS) / DAY) + m.b + m.lo + k * m.step); }
+function rbBandIndex(m, price, t) {
+  const r = Math.log10(price) - (m.a * Math.log((t - GENESIS) / DAY) + m.b);
+  return Math.floor((r - m.lo) / m.step);   // <0: di bawah band 1, >8: di atas band 9
+}
+function histPriceAt(t) {
+  const h = R.hist;
+  let lo = 0, hi = h.length - 1, ans = -1;
+  while (lo <= hi) { const mid = (lo + hi) >> 1; if (h[mid][0] <= t) { ans = mid; lo = mid + 1; } else hi = mid - 1; }
+  return ans < 0 ? null : h[ans][1];
+}
+
+function buildRainbowPoints() {
+  const startT = Date.UTC(2012, 0, 1), nowDay = Math.floor(Date.now() / DAY) * DAY, pts = [];
+  for (let t = startT; t < nowDay; t += 7 * DAY) pts.push(t);
+  pts.push(nowDay);
+  R.todayIdx = pts.length - 1;
+  for (let t = nowDay + 7 * DAY; t <= nowDay + 3 * 365 * DAY; t += 7 * DAY) pts.push(t);
+  R.pts = pts;
+}
+
+function fmtAxisUsd(v, log) {
+  if (log) { const l = Math.log10(v); if (Math.abs(l - Math.round(l)) > 1e-9) return ''; }
+  if (v >= 1e9) return '$' + v / 1e9 + 'B';
+  if (v >= 1e6) return '$' + v / 1e6 + 'M';
+  if (v >= 1e3) return '$' + v / 1e3 + 'K';
+  return '$' + v;
+}
+
+function renderRainbow() {
+  if (!R.active || !R.hist || !R.model) return;
+  const canvas = $('rbChart'), ph = $('rbPlaceholder');
+  if (R.chart) { R.chart.destroy(); R.chart = null; }
+  if (typeof Chart === 'undefined') { ph.style.display = 'block'; ph.innerHTML = '<h3>Chart.js gagal dimuat</h3>'; canvas.style.display = 'none'; return; }
+  ph.style.display = 'none'; canvas.style.display = 'block';
+  const m = R.model, cc = chartColors(), log = R.scale === 'log';
+  buildRainbowPoints();
+  const labels = R.pts.map(t => new Date(t).toISOString().slice(0, 10));
+  const yearStart = new Set();
+  labels.forEach((l, i) => { if (i === 0 || l.slice(0, 4) !== labels[i - 1].slice(0, 4)) yearStart.add(i); });
+  const live = R.price !== null ? R.price : histPriceAt(R.pts[R.todayIdx]);
+  const datasets = [];
+  for (let k = 0; k <= 9; k++) {
+    datasets.push({
+      label: 'band' + k, data: R.pts.map(t => rbEdge(m, k, t)), borderWidth: 0, pointRadius: 0,
+      fill: k === 0 ? false : k - 1, backgroundColor: k === 0 ? 'transparent' : RB_BANDS[k - 1].color + 'E6', order: 10
+    });
+  }
+  datasets.push({ label: 'Model', data: R.pts.map(t => rbCenter(m, t)), borderColor: cc.light ? 'rgba(0,0,0,.55)' : 'rgba(255,255,255,.6)', borderDash: [6, 5], borderWidth: 1.2, pointRadius: 0, fill: false, order: 1, showTip: true });
+  datasets.push({
+    label: 'Harga BTC', data: R.pts.map((t, i) => i === R.todayIdx ? live : (i < R.todayIdx ? histPriceAt(t) : null)),
+    borderColor: cc.light ? '#111' : '#fff', borderWidth: 2, fill: false, order: 0, showTip: true,
+    pointRadius: c => c.dataIndex === R.todayIdx ? 5 : 0, pointBackgroundColor: cc.light ? '#111' : '#fff'
+  });
+  const minP = Math.min(rbEdge(m, 0, R.pts[0]), ...R.hist.filter(x => x[0] >= R.pts[0]).map(x => x[1]));
+  const last = R.pts[R.pts.length - 1];
+  try {
+    R.chart = new Chart(canvas, {
+      type: 'line', data: { labels: labels, datasets: datasets },
+      options: {
+        responsive: true, maintainAspectRatio: false, animation: false,
+        interaction: { mode: 'index', intersect: false },
+        scales: {
+          x: { ticks: { color: cc.txt, autoSkip: false, maxRotation: 0, font: { size: 11 }, callback: (v, i) => yearStart.has(i) ? labels[i].slice(0, 4) : '' }, grid: { color: cc.grid } },
+          y: Object.assign({ type: log ? 'logarithmic' : 'linear', ticks: { color: cc.txt, callback: v => fmtAxisUsd(v, log) }, grid: { color: cc.grid } },
+            log ? { min: minP * 0.8, max: rbEdge(m, 9, last) * 1.2 } : { min: 0 })
+        },
+        plugins: {
+          legend: { display: false },
+          tooltip: {
+            filter: it => it.dataset.showTip === true,
+            callbacks: {
+              title: it => it[0].label,
+              label: c => c.parsed.y === null ? '' : c.dataset.label + ': ' + fmtUsd(c.parsed.y),
+              footer: items => {
+                const p = items.find(x => x.dataset.label === 'Harga BTC');
+                if (!p || p.parsed.y === null) return '';
+                const k = Math.max(0, Math.min(8, rbBandIndex(m, p.parsed.y, R.pts[p.dataIndex])));
+                return 'Band: ' + RB_BANDS[k].name;
+              }
+            }
+          }
+        }
+      }
+    });
+  } catch (e) { console.error('Rainbow:', e); ph.style.display = 'block'; ph.innerHTML = '<h3>Gagal menggambar chart</h3>'; canvas.style.display = 'none'; }
+  renderRainbowStats();
+}
+
+function renderRainbowStats() {
+  if (!R.model || !R.hist) return;
+  const m = R.model, now = Date.now();
+  const price = R.price !== null ? R.price : R.hist[R.hist.length - 1][1];
+  const center = rbCenter(m, now), idx = rbBandIndex(m, price, now);
+  const k = Math.max(0, Math.min(8, idx)), band = RB_BANDS[k];
+  $('rbPrice').textContent = fmtUsd(price);
+  $('rbLive').textContent = R.wsOk ? '● Realtime (WebSocket)' : (R.price !== null ? '● Polling' : 'Harga penutupan terakhir');
+  const be = $('rbBand');
+  be.textContent = band.name;
+  be.style.color = band.color;
+  $('rbBandId').textContent = band.id + (idx < 0 ? ' (di bawah band terendah)' : idx > 8 ? ' (di atas band tertinggi)' : '');
+  $('rbModel').textContent = fmtUsd(center);
+  const diff = (price / center - 1) * 100, de = $('rbDiff');
+  de.textContent = (diff >= 0 ? '+' : '') + diff.toFixed(2) + '%';
+  de.className = 'card-value ' + (diff >= 0 ? 'positive' : 'negative');
+  $('rbDays').textContent = 'Hari ke-' + Math.floor((now - GENESIS) / DAY).toLocaleString('en-US') + ' sejak 9 Jan 2009';
+  const box = $('rbLegend');
+  box.innerHTML = '';
+  for (let i = 8; i >= 0; i--) {
+    const row = document.createElement('div');
+    row.className = 'rb-row' + (i === k ? ' active' : '');
+    const sw = document.createElement('i'); sw.style.background = RB_BANDS[i].color;
+    const nm = document.createElement('span'); nm.className = 'nm'; nm.textContent = RB_BANDS[i].name + ' — ' + RB_BANDS[i].id;
+    const rg = document.createElement('span'); rg.className = 'rg';
+    rg.textContent = fmtUsd(rbEdge(m, i, now)) + '  –  ' + fmtUsd(rbEdge(m, i + 1, now));
+    row.appendChild(sw); row.appendChild(nm); row.appendChild(rg);
+    box.appendChild(row);
+  }
+  $('rbInfo').textContent = 'Model: log10(harga) = ' + m.a.toFixed(4) + ' × ln(hari sejak 9 Jan 2009) ' + (m.b < 0 ? '− ' : '+ ') + Math.abs(m.b).toFixed(4) +
+    '  |  R² = ' + m.r2.toFixed(3) + '  |  ' + m.n.toLocaleString('en-US') + ' hari data (' + R.source + '). ' +
+    'Kurva dikalibrasi otomatis dari data harga historis, jadi bandnya bisa sedikit berbeda dari situs rainbow chart lain. Hanya alat visualisasi sentimen, bukan saran investasi.';
+}
+
+function rbSetPrice(p) {
+  if (!(p > 0)) return;
+  R.price = p;
+  if (R.statTimer) return;
+  R.statTimer = setTimeout(() => {
+    R.statTimer = null;
+    if (!R.active) return;
+    renderRainbowStats();
+    if (R.chart && Date.now() - R.lastChartUpd > 2000) {
+      R.lastChartUpd = Date.now();
+      const ds = R.chart.data.datasets[R.chart.data.datasets.length - 1];
+      ds.data[R.todayIdx] = R.price;
+      R.chart.update('none');
+    }
+  }, 1000);
+}
+
+async function loadRainbow(token) {
+  const ph = $('rbPlaceholder');
+  $('rbChart').style.display = 'none';
+  ph.style.display = 'block';
+  ph.innerHTML = '<div class="loading-text"><span class="spinner"></span> Memuat data historis BTC...</div>';
+  try {
+    const r = await fetchBtcHistory();
+    R.hist = r.data; R.source = r.source;
+    R.model = fitModel(R.hist);
+    if (!R.model || !isFinite(R.model.a)) throw new Error('Model gagal dihitung');
+    if (R.active && token === R.token) renderRainbow();
+  } catch (err) {
+    R.hist = null;
+    if (R.active && token === R.token) { ph.innerHTML = ''; const h = document.createElement('h3'); h.textContent = 'Gagal memuat data: ' + err.message; ph.appendChild(h); const p = document.createElement('p'); p.textContent = 'Klik tombol refresh untuk mencoba lagi.'; ph.appendChild(p); }
+  }
+}
+
+function rainbowEnter() {
+  R.active = true;
+  const token = ++R.token;
+  R.ws = createTickerSocket(() => 'wss://stream.binance.com:9443/ws/btcusdt@ticker', m => {
+    if (token !== R.token || !m || m.c === undefined) return;
+    rbSetPrice(+m.c);
+  }, ok => { if (token === R.token) { R.wsOk = ok; renderRainbowStats(); } });
+  R.poll = setInterval(async () => {
+    if (!R.active || R.wsOk) return;
+    try { const r = await bnGetAny('spot', '/ticker/price', { symbol: 'BTCUSDT' }); rbSetPrice(+r.data.price); } catch (e) { /* abaikan */ }
+  }, 5000);
+  if (R.hist) renderRainbow(); else loadRainbow(token);
+}
+
+function rainbowStop() {
+  R.active = false;
+  R.token++;
+  if (R.ws) { R.ws.close(); R.ws = null; }
+  if (R.poll) { clearInterval(R.poll); R.poll = null; }
+  if (R.statTimer) { clearTimeout(R.statTimer); R.statTimer = null; }
+  R.wsOk = false;
+  if (R.chart) { R.chart.destroy(); R.chart = null; }
+}
+
+function onThemeChanged() {
+  if (M.inited) { M.tvKey = ''; if (M.active) { mountTV(); renderSeasonals(); } }
+  if (R.active) renderRainbow();
+}
+
+function initMarketEvents() {
+  $('mkSymbolBtn').addEventListener('click', () => { if ($('mkDropdown').classList.contains('hidden')) openDropdown(); else closeDropdown(); });
+  $('mkSearchInput').addEventListener('input', () => { if (M.list.length) renderSymbolList(); });
+  $('mkSearchInput').addEventListener('keydown', e => {
+    if (e.key === 'Enter') { const first = $('mkList').querySelector('.mk-row'); if (first) marketSelect(first.dataset.symbol, M.market); }
+    if (e.key === 'Escape') closeDropdown();
+  });
+  document.addEventListener('click', e => { if (!$('mkDropdown').classList.contains('hidden') && !e.target.closest('.mk-search')) closeDropdown(); });
+  document.querySelectorAll('#mkMarketSeg button').forEach(b => b.addEventListener('click', () => onMarketToggle(b.dataset.market)));
+  document.querySelectorAll('.rb-btn[data-rbscale]').forEach(b => b.addEventListener('click', () => {
+    R.scale = b.dataset.rbscale;
+    document.querySelectorAll('.rb-btn[data-rbscale]').forEach(x => x.classList.toggle('active', x === b));
+    renderRainbow();
+  }));
+  $('rbRefresh').addEventListener('click', () => {
+    try { localStorage.removeItem(RB_HIST_KEY); } catch (e) { /* abaikan */ }
+    R.hist = null; R.model = null;
+    if (R.active) loadRainbow(R.token);
+  });
+}
+
 /* ======================= ADMIN PANEL ======================= */
 const ADMIN = { users: [] };
 
 function activateTab(id) {
   document.querySelectorAll('.tab').forEach(t => t.classList.toggle('active', t.dataset.tab === id));
   document.querySelectorAll('.tab-content').forEach(c => c.classList.toggle('active', c.id === id));
+  if (id !== 'market') marketStop();
+  if (id !== 'rainbow') rainbowStop();
   if (id === 'dashboard') updateDashboard();
+  if (id === 'market') marketEnter();
+  if (id === 'rainbow') rainbowEnter();
   if (id === 'admin') loadAdminUsers();
 }
 
@@ -1501,12 +2404,14 @@ function init() {
     applyTheme(next);
     try { localStorage.setItem(THEME_KEY, next); } catch (e) { /* abaikan */ }
     updateDashboard();
+    onThemeChanged();
   });
 
   // Tab
   document.querySelectorAll('.tab').forEach(tab => tab.addEventListener('click', () => activateTab(tab.dataset.tab)));
 
   // Admin panel
+  initMarketEvents();
   $('adminRefresh').addEventListener('click', loadAdminUsers);
   $('adminForm').addEventListener('submit', onAdminAddUser);
   $('auditLoad').addEventListener('click', loadAudit);
