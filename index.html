@@ -4,6 +4,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>PORTO REALTIME</title>
+<!-- Favicon / logo tab -->
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 64 64%22%3E%3Cdefs%3E%3ClinearGradient id=%22g%22 x1=%220%22 y1=%220%22 x2=%221%22 y2=%221%22%3E%3Cstop offset=%220%22 stop-color=%22#6a3dff%22/%3E%3Cstop offset=%22.55%22 stop-color=%22#4361ee%22/%3E%3Cstop offset=%221%22 stop-color=%22#2fd4c4%22/%3E%3C/linearGradient%3E%3ClinearGradient id=%22c%22 x1=%220%22 y1=%220%22 x2=%220%22 y2=%221%22%3E%3Cstop offset=%220%22 stop-color=%22#ffe680%22/%3E%3Cstop offset=%221%22 stop-color=%22#ffb300%22/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width=%2264%22 height=%2264%22 rx=%2215%22 fill=%22url(#g)%22/%3E%3Crect x=%221.5%22 y=%221.5%22 width=%2261%22 height=%2261%22 rx=%2213.5%22 fill=%22none%22 stroke=%22#fff%22 stroke-opacity=%22.25%22 stroke-width=%222%22/%3E%3Cpolyline points=%2211,47 25,33 34,41 49,23%22 fill=%22none%22 stroke=%22#fff%22 stroke-width=%226.5%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22/%3E%3Ccircle cx=%2250%22 cy=%2220%22 r=%229%22 fill=%22url(#c)%22 stroke=%22#fff%22 stroke-width=%222.5%22/%3E%3Crect x=%2249%22 y=%2215%22 width=%222.6%22 height=%2210%22 rx=%221.3%22 fill=%22#b57a00%22/%3E%3C/svg%3E">
+<link rel="icon" type="image/png" sizes="32x32" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABmJLR0QA/wD/AP+gvaeTAAAFH0lEQVRYhbWXaWxUVRTHf/e+O9OZztIVBFosi2gM4pbwhUhCNJrwgeWDMTGKGBM+SIK4xA1DQU00UQOJRA0fcAMX+OBuSFACIUIgLKJoVDStIBVF2s6b6bxZ3z1+eJ122lRoTfuSl/vOfTfnd9/JOf97nqLq2rhRdM8Jf0WsQd9rQnKDcmyTKKVFCSgQJQhgq20FAogCKnb/2L/O95ELhZIcctO8umtb4kA1U1Ue1iyW2fWT5dPaOpmbyQjZrFAuV0GqnAY2Q+YrIwiiq9cJJgzxBNTGlPS48mFnT/yB/W+r/MAG1iyW2c2t9qiFhvN/CCVfRnRu1cjzQ0b93+siUcX0VkXG49D5XPzW3VtUQW/cKLp+snxqoeHc7xMHFwVewfLbWZ94nAWN4czrAOqhpeWVU2eotztPTww8ElUD8Iqv2lrFlS3anj5v55t4AyvS6fGFh8Jw57IwdyzSNDWGAOjuLbH7gM8HX+bpy1tyZfSkRvuIal/lX3BdO8lNjQ88HFG8uD7MzJYiJvsVFM4EWV7TRjl+Ox1dIR5+xSOeEBJJ1WXQtunS2T62sN+1PMTMlhzmz+fAT+Nl0nh9GZqntmDcg8yc1s49S2rYtc8jGVZTNFrp4U7+LxwtLL5NY3p2Qu4PKLp0nf6RX44egaILubOEenaydKFBjEU5OLoiLuORcPGEIhEPgXsCiungLufBlgdt9ziJWJhEQiOOYMYLXik1AMp9UEoHz7YAYgdt0weAOIIYQY8nPJ21ZDJFiM4Z/GK/CPiDdnQO6WyBdLEMjqAZJ7gowQJf7PexLauBEBRdWidrrpkVC3KAMKVpq/nsWAExAo5gxgteieJPnT46XAfz90DHS0TdY0QB6uZTanuCju4o2w+mcGoEcRTmUgfLSPCGRkV3yo4Ib2t1eGpVDLSCcDMy53mUEwHgYsrji8Nl3juUooBPzFFgbLABRgGvicC6x6LcOM9w8scyL2zJkfEG5TWZUDz/cIzaaJCJ1iqeeTPPd2dcxBE864MRxNgg/CaIgIbRwdufDOAAN841vLy+luYmjVWCE4INa2JMadYD5/zWzzMcPp3H8+0I8GAUp6oKLge/7lqnuo+grcVhc3uMGdMd1t4XZd7VZuDd7iM5dn2TDSDGjgw3tl8HxghP9wnJeBDm5gbNaxsShAbZfN9RZNPH6VHAgxzQY4Gf+rnMyscyfLSnMDBXDT/f7dP+boqSspeGV2wH9Fjg6zd5ZAuWNz7IsXVnDpFBuJcX1r3VS6rgjw5uCHRgeA93KbhXtAPR2vV1jgt9ZR5fEQfg2R0pOrtLo4QHVYBjMdVwtPD0o5eHixM42ncyz+Ffc2CErD/KsBvpV0GLGD1UCZNJxU3Xm1HBK449X4L5scBNAA/KEPxKP+/2WY6cKANw4ofLw+l3OHb4QBla4wt/h8JMk1zQFzy72aOxUXExZYfq/zjDQ2EHq+1FXSjJvkRy6Hkw0XCMEI8oitp+q//pLW+ORLWtjamRG5MJgIfCQl3U4Ep+h/7knfrjPa6809qicEITD8dY2pI19Nriqb0Lbn5fA/xVjj2YznJo1gxNNKom9Muvqo8gju3pEm8ZStlKF8ei+zsj05sbt9U3qLu9olVuzqdIv1OnCu4Ml9PhR+wwuGMJhSEeUdRFDb22eOpcIb/86ML5HVD1d1y5lqztuaUuKWvDUbVAGXsFRhxxAMcObsTpF5JhdrABqt5ZcLBW24sF7Z9MS2H73gU3v49StsL7Fy2W24r6akJfAAAAAElFTkSuQmCC">
+<link rel="apple-touch-icon" sizes="180x180" href="data:image/png;base64,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">
+<meta name="theme-color" content="#1a1c28">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
@@ -153,6 +158,16 @@ body.light-theme tfoot tr{background:rgba(224,224,224,.5)}
 #toastBox{position:fixed;right:20px;bottom:20px;z-index:9999;display:flex;flex-direction:column;gap:10px;max-width:90vw}
 .toast{padding:14px 20px;border-radius:12px;color:#fff;font-size:15px;box-shadow:0 8px 25px rgba(0,0,0,.4);animation:slideDown .3s ease-out;white-space:pre-line}
 .toast.success{background:#2a9d8f}.toast.error{background:#e53935}.toast.info{background:#4361ee}
+.role-badge{padding:4px 10px;border-radius:20px;font-size:12px;font-weight:700;letter-spacing:1px;display:inline-block}
+.role-owner{background:rgba(255,215,0,.2);color:#ffd700}
+.role-admin{background:rgba(67,97,238,.25);color:#7f94ff}
+.role-user{background:var(--soft);color:var(--text-secondary)}
+.admin-actions{display:flex;gap:6px;justify-content:center;flex-wrap:wrap}
+.admin-actions .btn-sm{padding:7px 11px}
+.modal-backdrop{position:fixed;inset:0;background:rgba(0,0,0,.65);z-index:9000;display:flex;align-items:center;justify-content:center;padding:20px}
+.modal{background:var(--card-bg);border:1px solid var(--card-border);border-radius:var(--radius);padding:25px;width:760px;max-width:100%;max-height:85vh;overflow:auto;box-shadow:var(--shadow)}
+.modal-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;gap:10px}
+.modal-header h3{font-size:20px}
 @media(max-width:992px){.tabs{flex-direction:column;border-radius:var(--radius)}.form-row{flex-direction:column}}
 @media(max-width:768px){.price-content{flex-direction:column;align-items:stretch}.dashboard-price-display{width:100%;justify-content:center}}
 </style>
@@ -194,6 +209,7 @@ body.light-theme tfoot tr{background:rgba(224,224,224,.5)}
       </div>
       <div class="header-actions">
         <div id="currentUsername" class="username-container"></div>
+        <span id="roleBadge" class="role-badge hidden"></span>
         <button class="theme-toggle" id="themeToggle" title="Toggle theme"><i class="fas fa-moon"></i></button>
         <button class="btn btn-logout" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Logout</button>
       </div>
@@ -202,6 +218,7 @@ body.light-theme tfoot tr{background:rgba(224,224,224,.5)}
     <div class="tabs">
       <div class="tab active" data-tab="transactions"><i class="fas fa-exchange-alt"></i> Transactions</div>
       <div class="tab" data-tab="dashboard"><i class="fas fa-chart-line"></i> Dashboard</div>
+      <div class="tab hidden" id="adminTab" data-tab="admin"><i class="fas fa-user-shield"></i> Admin</div>
     </div>
 
     <!-- Transactions -->
@@ -248,8 +265,8 @@ body.light-theme tfoot tr{background:rgba(224,224,224,.5)}
         <h3><i class="fas fa-file-import"></i> Batch Transactions</h3>
         <form id="batchForm">
           <div class="form-group">
-            <label for="batchInput">Format: DATE, COIN, TYPE, HARGA BELI, MODAL BELI (1 transaksi per baris). Nominal dalam <b id="batchCurrency">IDR</b>. Pemisah kolom: koma, titik koma (;) atau tab. Angka boleh 1.000.000 atau 62.534,5 (jika pakai koma desimal, pisahkan kolom dengan ; atau tab).</label>
-            <textarea id="batchInput" class="form-control" rows="5" placeholder="Contoh:&#10;2025-07-07,BTC,buy,1762332734,1000000&#10;07/07/2025;ETH;beli;54.321.000,5;500.000"></textarea>
+            <label for="batchInput">Format: DATE, COIN, TYPE, HARGA BELI, MODAL BELI (1 transaksi per baris). Nominal dalam <b id="batchCurrency">IDR</b>, tulis seperti dolar: 1782575000 atau 1782575000.50 (tanpa pemisah ribuan). Pemisah kolom: koma, titik koma (;) atau tab.</label>
+            <textarea id="batchInput" class="form-control" rows="5" placeholder="Contoh:&#10;2025-06-11,BTC,BUY,1782575000,7992748&#10;2025-07-24,BTC,BUY,1926981000,5008273"></textarea>
           </div>
           <div id="batchError" style="color:var(--danger);margin:15px 0;white-space:pre-line"></div>
           <button type="submit" class="btn" id="batchBtn"><i class="fas fa-upload"></i> Add Batch Transactions</button>
@@ -321,12 +338,65 @@ body.light-theme tfoot tr{background:rgba(224,224,224,.5)}
       </div>
     </div>
 
+    <!-- Admin Panel -->
+    <div id="admin" class="tab-content">
+      <div class="dashboard-header">
+        <h1><i class="fas fa-user-shield"></i> Admin Panel</h1>
+        <button class="btn" id="adminRefresh"><i class="fas fa-sync-alt"></i> Refresh</button>
+      </div>
+      <div class="cards-container">
+        <div class="card"><h3><i class="fas fa-users"></i> Total User</h3><div id="statUsers" class="card-value">0</div></div>
+        <div class="card"><h3><i class="fas fa-user-shield"></i> Admin &amp; Owner</h3><div id="statAdmins" class="card-value">0</div></div>
+        <div class="card"><h3><i class="fas fa-user-slash"></i> Nonaktif</h3><div id="statDisabled" class="card-value">0</div></div>
+        <div class="card"><h3><i class="fas fa-exchange-alt"></i> Total Transaksi</h3><div id="statTx" class="card-value">0</div></div>
+      </div>
+
+      <div class="form-section" style="margin-top:30px">
+        <h3><i class="fas fa-user-plus"></i> Tambah User</h3>
+        <form id="adminForm" autocomplete="off">
+          <div class="form-row">
+            <div class="form-group"><label for="adminNewUser">Username (3-30 karakter: huruf, angka, _ . -)</label><input type="text" id="adminNewUser" class="form-control" required></div>
+            <div class="form-group"><label for="adminNewPass">Password (min. 6 karakter)</label><input type="password" id="adminNewPass" class="form-control" autocomplete="new-password" required></div>
+            <div class="form-group"><label for="adminRole">Role</label>
+              <select id="adminRole" class="form-control"><option value="user">User</option><option value="admin">Admin (khusus owner)</option></select>
+            </div>
+            <div class="form-group" style="align-self:flex-end"><button type="submit" class="btn" id="adminAddBtn"><i class="fas fa-plus"></i> Tambah</button></div>
+          </div>
+        </form>
+      </div>
+
+      <div class="table-container">
+        <div class="table-header"><h2><i class="fas fa-users-cog"></i> Daftar User</h2></div>
+        <table id="adminUsersTable" style="min-width:900px">
+          <thead><tr><th>Username</th><th>Role</th><th>Status</th><th>Transaksi</th><th>Dibuat</th><th>Login Terakhir</th><th>Aksi</th></tr></thead>
+          <tbody id="adminUsersBody"></tbody>
+        </table>
+      </div>
+
+      <div class="table-container">
+        <div class="table-header">
+          <h2><i class="fas fa-clipboard-list"></i> Audit Log (100 terakhir)</h2>
+          <button class="btn" id="auditLoad"><i class="fas fa-download"></i> Muat Audit Log</button>
+        </div>
+        <table style="min-width:800px">
+          <thead><tr><th>Waktu</th><th>Pelaku</th><th>Aksi</th><th>Target</th><th>Detail</th></tr></thead>
+          <tbody id="auditBody"><tr><td colspan="5">Klik "Muat Audit Log" untuk menampilkan.</td></tr></tbody>
+        </table>
+      </div>
+    </div>
+
     <footer class="app-footer">
       <p>© 2025 Real-time PORTO Powered by Stev | Logged in as: <span id="footerUsername" class="footer-username">Guest</span></p>
     </footer>
   </div>
 </div>
 
+<div id="modalBackdrop" class="modal-backdrop hidden">
+  <div class="modal">
+    <div class="modal-header"><h3 id="modalTitle"></h3><button class="btn btn-danger btn-sm" id="modalClose" title="Tutup"><i class="fas fa-times"></i></button></div>
+    <div id="modalBody"></div>
+  </div>
+</div>
 <div id="toastBox"></div>
 
 <script>
@@ -392,16 +462,17 @@ function setBusy(btn, busy) {
   }
 }
 
+const CURRENCY_SYMBOLS = { IDR:'Rp', USD:'$', EUR:'€', GBP:'£', JPY:'¥', AUD:'A$', CAD:'C$', CHF:'CHF ', SEK:'kr ', NOK:'kr ' };
+// Semua mata uang (termasuk IDR) memakai gaya yang sama dengan dolar: simbol + 1,234,567.89
 function fmtMoney(v, cur) {
   cur = cur || 'IDR';
   v = Number(v);
   if (!isFinite(v)) v = 0;
   const abs = Math.abs(v);
-  let d = (cur === 'IDR' || cur === 'JPY') ? 0 : 2;
-  if (abs > 0 && abs < 1) d = 8; else if (abs >= 1 && abs < 100 && (cur === 'IDR' || cur === 'JPY')) d = 4;
-  try {
-    return new Intl.NumberFormat(CURRENCY_LOCALES[cur] || 'en-US', { style:'currency', currency:cur, minimumFractionDigits:0, maximumFractionDigits:d }).format(v);
-  } catch (e) { return cur + ' ' + v.toFixed(2); }
+  const base = cur === 'JPY' ? 0 : 2;
+  const small = abs > 0 && abs < 1;
+  const num = new Intl.NumberFormat('en-US', { minimumFractionDigits: small ? 0 : base, maximumFractionDigits: small ? 8 : base }).format(abs);
+  return (v < 0 ? '-' : '') + (CURRENCY_SYMBOLS[cur] || (cur + ' ')) + num;
 }
 // Faktor konversi IDR -> mata uang terpilih (data selalu disimpan dalam IDR)
 function fx() {
@@ -523,7 +594,7 @@ async function handleLogin() {
   btn.textContent = 'MEMERIKSA...';
   try {
     const d = await api('login', { username: username, password: key });
-    S.session = { token: d.token, username: d.username };
+    S.session = { token: d.token, username: d.username, role: d.role || 'user' };
     sessionStorage.setItem(SESSION_KEY, JSON.stringify(S.session));
     btn.style.background = 'linear-gradient(135deg,#00ff88,#00ccff)';
     btn.textContent = '✓ ACCESS GRANTED';
@@ -548,6 +619,11 @@ function forceLogout(message) {
   S.transactions = []; S.prices = {}; S.prevPrices = {}; S.tracker = {}; S.prevTracker = {}; S.changes = {};
   S.selectedCoin = '';
   if (S.chart) { S.chart.destroy(); S.chart = null; }
+  ADMIN.users = [];
+  closeModal();
+  $('adminTab').classList.add('hidden');
+  $('roleBadge').className = 'role-badge hidden';
+  activateTab('transactions');
   $('portfolioPage').classList.add('hidden');
   $('loginPage').classList.remove('hidden');
   $('username').value = '';
@@ -593,6 +669,7 @@ async function showPortfolio() {
     toast('Kurs gagal dimuat, kembali ke IDR.', 'info');
   }
   syncCurrencyLabels();
+  applyRole();
   renderAll();
   await updatePrices();
 
@@ -604,6 +681,10 @@ async function loadTransactions() {
   try {
     const d = await api('list');
     S.transactions = normalize(d.transactions);
+    if (d.role && S.session) {
+      S.session.role = d.role;
+      sessionStorage.setItem(SESSION_KEY, JSON.stringify(S.session));
+    }
   } catch (err) {
     reportError(err);
     S.transactions = [];
@@ -1014,7 +1095,7 @@ async function onAddSingle(e) {
 
 const COIN_ALIASES = { FART: 'FARTCOIN', TROLLSOL: 'TROLL' };
 
-// Mengerti format Indonesia (1.000.000 / 62.534,5) maupun internasional (1,000,000 / 62534.5)
+// Gaya dolar: 1782575000 / 1,782,575,000.50 / 62534.5 (format Indonesia 1.000.000 atau 62.534,5 juga terbaca)
 function parseNum(raw) {
   let s = String(raw == null ? '' : raw).replace(/[^\d.,]/g, '');
   if (!/\d/.test(s)) return NaN;
@@ -1026,11 +1107,7 @@ function parseNum(raw) {
   } else if (commas) {
     s = commas > 1 ? s.replace(/,/g, '') : s.replace(',', '.');
   } else if (dots) {
-    if (dots > 1) s = s.replace(/\./g, '');
-    else {
-      const p = s.split('.');
-      if (p[1].length === 3 && p[0].length >= 1 && p[0].length <= 3 && Number(p[0]) !== 0) s = p[0] + p[1];
-    }
+    if (dots > 1) s = s.replace(/\./g, '');   // 1.000.000 -> ribuan; satu titik = desimal (gaya dolar)
   }
   const n = parseFloat(s);
   return isFinite(n) ? n : NaN;
@@ -1139,6 +1216,248 @@ async function onDeleteRow(e) {
   } catch (err) { btn.disabled = false; reportError(err); }
 }
 
+/* ======================= ADMIN PANEL ======================= */
+const ADMIN = { users: [] };
+
+function activateTab(id) {
+  document.querySelectorAll('.tab').forEach(t => t.classList.toggle('active', t.dataset.tab === id));
+  document.querySelectorAll('.tab-content').forEach(c => c.classList.toggle('active', c.id === id));
+  if (id === 'dashboard') updateDashboard();
+  if (id === 'admin') loadAdminUsers();
+}
+
+function isAdminRole() {
+  const r = S.session && S.session.role;
+  return r === 'admin' || r === 'owner';
+}
+
+function applyRole() {
+  const role = S.session ? S.session.role : '';
+  const adm = isAdminRole();
+  $('adminTab').classList.toggle('hidden', !adm);
+  const rb = $('roleBadge');
+  if (adm) { rb.className = 'role-badge role-' + role; rb.textContent = role.toUpperCase(); }
+  else { rb.className = 'role-badge hidden'; rb.textContent = ''; }
+  const opt = $('adminRole').querySelector('option[value="admin"]');
+  opt.disabled = role !== 'owner';
+  opt.hidden = role !== 'owner';
+  if (role !== 'owner') $('adminRole').value = 'user';
+  if (!adm && $('admin').classList.contains('active')) activateTab('transactions');
+}
+
+function fmtDT(iso) {
+  if (!iso) return '-';
+  const d = new Date(iso);
+  return isNaN(d.getTime()) ? '-' : d.toLocaleString('en-GB', { dateStyle: 'medium', timeStyle: 'short' });
+}
+
+function roleBadgeEl(role) {
+  const s = document.createElement('span');
+  s.className = 'role-badge role-' + role;
+  s.textContent = role.toUpperCase();
+  return s;
+}
+
+function openModal(title, node) {
+  $('modalTitle').textContent = title;
+  const b = $('modalBody');
+  b.innerHTML = '';
+  b.appendChild(node);
+  $('modalBackdrop').classList.remove('hidden');
+}
+function closeModal() {
+  $('modalBackdrop').classList.add('hidden');
+  $('modalBody').innerHTML = '';
+}
+
+// Jika hak akses dicabut saat sesi berjalan, perbarui role dari server
+async function adminCall(action, payload) {
+  try { return await api(action, payload); }
+  catch (err) {
+    if (!err.silent && /Akses ditolak: hanya admin/.test(err.message)) { await loadTransactions(); applyRole(); }
+    throw err;
+  }
+}
+
+async function adminDo(action, payload, okMsg) {
+  try {
+    const d = await adminCall(action, payload);
+    if (d.users) { ADMIN.users = d.users; renderAdminUsers(); }
+    if (okMsg) toast(okMsg, 'success');
+    return d;
+  } catch (err) { reportError(err); return null; }
+}
+
+async function loadAdminUsers() {
+  const body = $('adminUsersBody');
+  body.innerHTML = '<tr><td colspan="7"><div class="loading-text"><span class="spinner"></span> Memuat user...</div></td></tr>';
+  try {
+    const d = await adminCall('admin_users');
+    ADMIN.users = d.users;
+    renderAdminUsers();
+  } catch (err) {
+    body.innerHTML = '<tr><td colspan="7">Gagal memuat data user.</td></tr>';
+    reportError(err);
+  }
+}
+
+function actBtn(icon, title, cls, fn) {
+  const b = document.createElement('button');
+  b.className = 'btn btn-sm ' + (cls || '');
+  b.title = title;
+  b.innerHTML = '<i class="' + icon + '"></i>';
+  b.addEventListener('click', async () => {
+    b.disabled = true;
+    try { await fn(); } finally { b.disabled = false; }
+  });
+  return b;
+}
+
+function renderAdminUsers() {
+  const users = ADMIN.users, myRole = S.session ? S.session.role : '';
+  $('statUsers').textContent = users.length;
+  $('statAdmins').textContent = users.filter(u => u.role === 'admin' || u.role === 'owner').length;
+  $('statDisabled').textContent = users.filter(u => u.status === 'disabled').length;
+  $('statTx').textContent = users.reduce((s, u) => s + u.txCount, 0).toLocaleString('en-US');
+
+  const body = $('adminUsersBody');
+  body.innerHTML = '';
+  if (!users.length) { const r = body.insertRow(); const c = r.insertCell(0); c.colSpan = 7; c.textContent = 'Belum ada user.'; return; }
+
+  users.forEach(u => {
+    const r = body.insertRow();
+    r.appendChild(td(u.username + (u.self ? ' (Anda)' : '')));
+    const rt = document.createElement('td'); rt.appendChild(roleBadgeEl(u.role)); r.appendChild(rt);
+    const st = document.createElement('td');
+    const sp = document.createElement('span');
+    sp.className = u.status === 'active' ? 'badge-buy' : 'badge-sell';
+    sp.textContent = u.status === 'active' ? 'AKTIF' : 'NONAKTIF';
+    st.appendChild(sp); r.appendChild(st);
+    r.appendChild(td(String(u.txCount)));
+    r.appendChild(td(fmtDT(u.createdAt)));
+    r.appendChild(td(fmtDT(u.lastLogin)));
+
+    const act = document.createElement('td');
+    const box = document.createElement('div');
+    box.className = 'admin-actions';
+    if (u.canManage || u.self) {
+      box.appendChild(actBtn('fas fa-eye', 'Lihat transaksi', '', () => adminViewTx(u)));
+      box.appendChild(actBtn('fas fa-key', 'Reset password', '', () => adminResetPw(u)));
+    }
+    if (u.canManage && !u.self) {
+      const active = u.status === 'active';
+      box.appendChild(actBtn(active ? 'fas fa-user-slash' : 'fas fa-user-check', active ? 'Nonaktifkan' : 'Aktifkan', '', () => adminToggleStatus(u)));
+      if (myRole === 'owner') {
+        const isAdm = u.role === 'admin';
+        box.appendChild(actBtn(isAdm ? 'fas fa-user-minus' : 'fas fa-user-shield', isAdm ? 'Cabut akses admin' : 'Jadikan admin', '', () => adminToggleRole(u)));
+      }
+      box.appendChild(actBtn('fas fa-trash-alt', 'Hapus user', 'btn-danger', () => adminDelete(u)));
+    }
+    if (!box.children.length) box.textContent = '-';
+    act.appendChild(box); r.appendChild(act);
+  });
+}
+
+async function onAdminAddUser(e) {
+  e.preventDefault();
+  const username = $('adminNewUser').value.trim(), password = $('adminNewPass').value, role = $('adminRole').value;
+  if (!/^[A-Za-z0-9_.-]{3,30}$/.test(username)) return toast('Username 3-30 karakter (huruf, angka, _ . -)', 'error');
+  if (password.length < 6) return toast('Password minimal 6 karakter', 'error');
+  const btn = $('adminAddBtn');
+  setBusy(btn, true);
+  const d = await adminDo('admin_addUser', { username: username, password: password, role: role }, 'User ' + username + ' ditambahkan');
+  setBusy(btn, false);
+  if (d) { $('adminForm').reset(); $('adminRole').value = 'user'; }
+}
+
+async function adminToggleStatus(u) {
+  const next = u.status === 'active' ? 'disabled' : 'active';
+  const msg = next === 'disabled' ? 'Nonaktifkan "' + u.username + '"? User langsung logout dan tidak bisa login.' : 'Aktifkan kembali "' + u.username + '"?';
+  if (!confirm(msg)) return;
+  await adminDo('admin_setStatus', { username: u.username, status: next }, u.username + (next === 'disabled' ? ' dinonaktifkan' : ' diaktifkan'));
+}
+
+async function adminToggleRole(u) {
+  const next = u.role === 'admin' ? 'user' : 'admin';
+  const msg = next === 'admin' ? 'Beri akses ADMIN kepada "' + u.username + '"?' : 'Cabut akses admin dari "' + u.username + '"?';
+  if (!confirm(msg)) return;
+  await adminDo('admin_setRole', { username: u.username, role: next }, u.username + (next === 'admin' ? ' sekarang admin' : ' bukan admin lagi'));
+}
+
+async function adminDelete(u) {
+  if (!confirm('HAPUS user "' + u.username + '" beserta ' + u.txCount + ' transaksinya? Tindakan ini permanen.')) return;
+  await adminDo('admin_deleteUser', { username: u.username }, 'User ' + u.username + ' dihapus');
+}
+
+function adminResetPw(u) {
+  const box = document.createElement('div');
+  const lbl = document.createElement('label');
+  lbl.textContent = 'Password baru untuk ' + u.username + ' (min. 6 karakter)';
+  lbl.style.cssText = 'display:block;margin-bottom:8px;color:var(--text-secondary)';
+  const inp = document.createElement('input');
+  inp.type = 'password'; inp.className = 'form-control'; inp.autocomplete = 'new-password';
+  const save = document.createElement('button');
+  save.className = 'btn'; save.style.marginTop = '15px';
+  save.innerHTML = '<i class="fas fa-save"></i> Simpan';
+  const submit = async () => {
+    if (inp.value.length < 6) return toast('Password minimal 6 karakter', 'error');
+    setBusy(save, true);
+    const d = await adminDo('admin_setPassword', { username: u.username, password: inp.value }, 'Password ' + u.username + ' diubah');
+    setBusy(save, false);
+    if (d) closeModal();
+  };
+  save.addEventListener('click', submit);
+  inp.addEventListener('keydown', e => { if (e.key === 'Enter') submit(); });
+  box.appendChild(lbl); box.appendChild(inp); box.appendChild(save);
+  openModal('Reset Password', box);
+  inp.focus();
+}
+
+async function adminViewTx(u) {
+  let d;
+  try { d = await adminCall('admin_userTx', { username: u.username }); }
+  catch (err) { return reportError(err); }
+  const txs = sortedDesc(normalize(d.transactions));
+  const box = document.createElement('div');
+  const info = document.createElement('p');
+  info.style.cssText = 'margin-bottom:15px;color:var(--text-secondary)';
+  info.textContent = u.username + ' — ' + txs.length + ' transaksi (hanya lihat, nominal dalam ' + S.currency + ')';
+  box.appendChild(info);
+  const wrap = document.createElement('div');
+  wrap.style.overflowX = 'auto';
+  const tbl = document.createElement('table');
+  tbl.style.minWidth = '600px';
+  tbl.innerHTML = '<thead><tr><th>Date</th><th>Coin</th><th>Type</th><th>Price</th><th>Quantity</th><th>Value</th></tr></thead>';
+  const tb = document.createElement('tbody');
+  if (!txs.length) { const r = tb.insertRow(); const c = r.insertCell(0); c.colSpan = 6; c.textContent = 'Belum ada transaksi.'; }
+  txs.forEach(t => {
+    const r = tb.insertRow();
+    r.appendChild(td(t.date));
+    r.appendChild(td(t.coin));
+    r.appendChild(td(t.type.toUpperCase(), t.type === 'buy' ? 'positive' : 'negative'));
+    r.appendChild(td(fmtIDR(t.price)));
+    r.appendChild(td(t.quantity.toLocaleString('en-US', { maximumFractionDigits: 8 })));
+    r.appendChild(td(fmtIDR(t.quantity * t.price)));
+  });
+  tbl.appendChild(tb); wrap.appendChild(tbl); box.appendChild(wrap);
+  openModal('Transaksi: ' + u.username, box);
+}
+
+async function loadAudit() {
+  const btn = $('auditLoad'), body = $('auditBody');
+  setBusy(btn, true);
+  try {
+    const d = await adminCall('admin_audit');
+    body.innerHTML = '';
+    if (!d.logs.length) { const r = body.insertRow(); const c = r.insertCell(0); c.colSpan = 5; c.textContent = 'Belum ada aktivitas admin.'; return; }
+    d.logs.forEach(l => {
+      const r = body.insertRow();
+      r.appendChild(td(fmtDT(l.time))); r.appendChild(td(l.actor)); r.appendChild(td(l.action)); r.appendChild(td(l.target)); r.appendChild(td(l.detail || '-'));
+    });
+  } catch (err) { reportError(err); }
+  finally { setBusy(btn, false); }
+}
+
 /* ======================= INISIALISASI ======================= */
 function applyTheme(theme) {
   const icon = $('themeToggle').querySelector('i');
@@ -1185,13 +1504,15 @@ function init() {
   });
 
   // Tab
-  document.querySelectorAll('.tab').forEach(tab => tab.addEventListener('click', () => {
-    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-    document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
-    tab.classList.add('active');
-    $(tab.dataset.tab).classList.add('active');
-    if (tab.dataset.tab === 'dashboard') updateDashboard();
-  }));
+  document.querySelectorAll('.tab').forEach(tab => tab.addEventListener('click', () => activateTab(tab.dataset.tab)));
+
+  // Admin panel
+  $('adminRefresh').addEventListener('click', loadAdminUsers);
+  $('adminForm').addEventListener('submit', onAdminAddUser);
+  $('auditLoad').addEventListener('click', loadAudit);
+  $('modalClose').addEventListener('click', closeModal);
+  $('modalBackdrop').addEventListener('click', e => { if (e.target === $('modalBackdrop')) closeModal(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
 
   // Form & tabel
   $('transactionForm').addEventListener('submit', onAddSingle);
